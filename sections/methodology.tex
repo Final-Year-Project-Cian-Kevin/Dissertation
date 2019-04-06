@@ -1,14 +1,20 @@
 \chapter{Methodology}
 In this chapter we will explore the approaches followed to plan, organise, manage and develop the project. We will discuss the methodologies that were adapted and combined to complete the research and development of the project along with why they were implemented. This section aims to give insight to the reader how the project transformed from research to final software while collaborating as a team.
 
-Throughout our four years at GMIT a major emphasis was always placed on the importance of software development methodologies and the importance of choosing the most suitable methodology for a given project;. There are numerous  methodologies that have all been extensivly explore such as Waterfall, RAD (Rapid Application Development) and Extreme Programming to name a few. For this project we chose the main modern leader also based on the methodologies used by our employers, a concept known as Agile programming.
+Throughout our four years at GMIT a major emphasis was always placed on the importance of software development methodologies and the importance of choosing the most suitable methodology for a given project. There are numerous  methodologies that have all been extensively explored such as Waterfall, RAD (Rapid Application Development) and Extreme Programming to name a few. For this project we chose the main modern leader also based on the methodologies used by our employers, an approach known as Agile programming.
 
+% ========================== Version Control  ========================== 
+\section{Version Control}
+In regards to version control with a focus on collaboration we decided to use the online Github Source Control Software. Github is a development platform allowing users to host and review code while also functioning as a simple yet powerful project management tool. Allowing the team to collaborate and support every aspect of the project management in one place it was an easy decision. 
+
+Github enabled us to set up a team organisation that could store both our dissertation and our applied project repository's. We took full advantage of the many features that Github has to offer. The main function of Github allowed us to commit our work to the repositories and merge changes into the existing project. Another effective feature of Github is the project section, which is used to optimize project management. With a built in Kanban board we were able to track our progress while also logging any bugs or issues that arise \textit{(more details on this are given in Section \ref{KanbanSection})}. In respect to Software Development another impressive feature of Github is the ability to create branches. Essentially a branch is a pointer to a unique set of modifications to the original "Master" branch and is given its own branch name. Creating separate branches allows us to work on features and experiment with different functions without having an effect on the main project. When each feature is tested and complete, Github simple allows us to \textit{merge} our new changes back into the main \textit{master} branch.
 
 % ========================== Development approach  ========================== 
 \section{Agile development approach}
-Agile Software Development is a concept that allows a product be delivered to the customer in incremental releases while also being highly flexiable, allowing requiremnts to change and the scope of the project to increase without major consequences on the design or current task.
+Agile Software Development is a concept that allows a product be delivered to the customer in incremental releases while also being highly flexible, allowing requirements to change and the scope of the project to increase without major consequences on the design or current task\cite{agile}.
 
 We chose Agile as it stood out and had many benefits to our own project:
+(https://project-management.com/10-key-principles-of-agile-software-development/=======imagelink for ref)
 
 \begin{figure}[H]
 \begin{minipage}{.5\textwidth}  %listing bloc will have 50% of the line width 
@@ -24,24 +30,47 @@ We chose Agile as it stood out and had many benefits to our own project:
 \qquad %space between listing bloc and the figure
 \begin{minipage}{0.4\textwidth} %figure will have the remaning 40% of the line width
 \includegraphics[scale=.4]{img/agile.jpg} %the image must be resized or scaled if needed
-\caption{caption}
+\caption{The Agile Cycle}
 \end{minipage}
 \end{figure}
 
 Firstly as we were exploring all new languages, frameworks and libraries Agile allowed us to easily continuously integrate new features as our knowledge portfolio grew. Another major advantage was that this approach allowed us to have a working model every week rather than releasing the project in one release as would be in the Waterfall methodology. This alone gave us the opportunity to review each weeks progress while also receive continuous feedback from our mentors.
 
-From the outset of the planning phase the main requirements and features of the software were identified. Subsequently we broke these features down into sub tasks which enabled complex tasks to be completed with simplicity.   
+From the outset of the planning phase the main requirements and features of the software were identified. Subsequently we broke these features down into sub tasks which enabled complex tasks to be completed with simplicity. In the following subsections we will explain how using two prominent features of Agile, namely Kanban and Sprints we could track our development and monitor our progress.
 
 
 % ========================== KanBan  ========================== 
-\subsection{KanBan}
-The Kanban Method is a means to design, manage, and improve flow systems for knowledge work. The method also allows organizations to start with their existing workflow and drive evolutionary change. They can do this by visualizing their flow of work, limit work in progress (WIP) and stop starting and start finishing.
+\subsection{KanBan} \label{KanbanSection}
+The Kanban Method is a means to design, manage, and improve flow systems for knowledge work. The method also allows organizations to start with their existing workflow and drive evolutionary change. They can do this by visualizing their flow of work, limit work in progress and stop starting and start finishing \cite{kanban}.
 
-The Kanban Method gets its name from the use of kanban - visual signaling mechanisms to control work in progress for intangible work products.
+The Kanban Method gets its name from the use of kanban - visual signaling mechanisms to control work in progress for intangible work products. In simplicity Kanban is based around a Kanban board featuring Kanban cards (sticky notes). Thus allowing the full team to visualize crucial project information such as what tasks need doing, what tasks are in progress (and by whom) and what tasks are complete. 
 
-% ========================== Version Control  ========================== 
-\section{Version Control}
-Use of github, branches , KanBan project section to track progress
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{img/kanban.PNG}
+  \caption{Github Kanban}
+  \label{fig:kanban}
+\end{figure}
+
+Figure  ~\ref{fig:kanban} above contains a snapshot of the projects Kanban board during development using the online project utility available on Github. This allowed us, as a team, to see at any point in time, what tasks needing doing, which were in progress or completed, while also tracking bugs and and a section to propose improvements.
+
+% ========================== Sprints   ========================== 
+\subsection{Sprints}
+The term Sprint is mainly used in the Scrum framework of the Agile methodology and for our project worked hand-in-hand with Kanban. A Sprint is a timed iteration of the continuous development cycle with a scrum being a meeting style discussion used to adapt feedback. During development our default sprint duration was one week starting directly after each weekly review with our supervisor and ending at the following review where we would conduct a sprint plan. The aim of the sprint plan is to as a team reach two key decisions, \textbf{Sprint goal} what can be achieved in the sprint and \textbf{Sprint Backlog} the tasks to be completed in order to achieve the goal. During each sprint plan we would we would analyze the Kanban and discuss the following topics:
+
+\begin{enumerate}
+  \item What did we complete in our preceding sprint?
+  \item What issues did we face?
+  \item Is anything preventing us from progressing with a feature?
+  \item Do any features need improvement?
+  \item What backlog items to be implemented in the next sprint?
+  \item What backlog items can we implement in the next sprint?
+\end{enumerate}
+
+
+
+
+
+
 
 % ========================== Choice of tech  ========================== 
 \section{Choice of tech }
