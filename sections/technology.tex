@@ -27,6 +27,21 @@ Databases are classified into two categories of SQL and NoSQL. MySQL is an examp
 
 MongoDB is so hands off about how users read and write to the database it stops the frequently used attack on SQL databases called SQL injection. SQL injection occurs when the user directly interacts with the database which allows them to manipulate their input to test the database. MongoDB doesn't have this problem as its hands off the reading data to the user to the point where a search for that data will include the statement but nor process the statement as such.
 
+MongoDB uses the JSON standard to store data. The JSON data is then classified into a collection as we discussed above. 
+
+Example of how a JSON entry in a collection could look like:
+
+\begin{minted}{js}
+{
+    "username": "Smithy",
+    "password": "smith123",
+    "name": {
+        "first_name" : "John",
+        "second_name" : "Smith",
+    }
+}
+\end{minted}
+
 \subsection{ExpressJS}
 ExpressJS is a minimalistic web framework built for Node.js that waits for the browser to connect so the server can send process the request and send back the relevant form (JSON, HTML, Raw Text, ETC...). Without ExpressJS the user must handle creating a server, handling routing all manually.
 
@@ -70,14 +85,66 @@ For code deployments we looked at numerous cloud service provides to figure out 
 
 We ruled out Google cloud after lots of debate on how to move forward with deployment. The reason to remove Google Cloud first was we felt that we wanted to get a greater understanding of a different cloud service provider as we already had experience with Google Cloud. After ruling our Google Cloud we were left with Heroku and AWS. After researching more into both options and figuring out what would better with our project we decided to go with AWS because of AWS's Elastic Beanstalk. AWS Elastic Beanstalk is a system provided by AWS for deploying and scaling web applications and services developed with Java, .NET, PHP, Node.js, Python, Ruby, Go, and Docker on familiar servers.  Because of AWS's Elastic Beanstalk and us using the MEAN stack, it was an easy way to deploy our project, and an easier way to expand the project if we wanted to go commercial with the website.
 
+% ========================== STANDARDS  ========================== 
+\section{Standards}
+\subsection{JSON}
+JavaScript Object-Notation is a specification for Serialization a data object. Serialization is a is the process that turns a price of code into a string of characters in order to transmit it. 
+
+The basic idea is that if you want to transmit a piece of data that has attributes such as name, address, age, etc and turning it into a string.
+
+An example of converting an object to JSON specification would be for example this object of the user.
+
+\begin{minted}{java}
+class user{
+    string username;
+    string password;
+    int age;
+}
+\end{minted}
+
+Let's say the user created an instance of this object and set the values to "Smithy", "smith123" and "25". To send this instance over to another machine in a standard the other machine we can't just send it in raw text using HTTP so we need to serialize the data before transfer using the JSON specification. 
+
+The JSON string would look like this when the class is serialized:
+\begin{minted}{js}
+{
+    "username": "Smithy",
+    "password": "smith123",
+    "age": 25
+}
+\end{minted}
+
+Once the class is correctly serialized, the object can be added to the HTTP request to be sent over to the other machine. The JSON object would be added to the body of the HTTP request for the machine on the other end to retrieve and do with as it needs.
+
+An example of it in the body would be:
+\begin{minted}{js}
+{ "user": {"username": "Smithy","password": "smith123","age": 25} }
+\end{minted}
+
+With this machine-readable string, I can now retrieve the data by deserializing the string back into an object. This all works because of the JSON specification which creates a standard for how to serialize and deserialize the JSON object.
+
+\subsection{REST}
+
 % ========================== API  ========================== 
-\section{Node API}
-Where did we get site data?
+\section{API}
+\subsection{Reddit API}
+The Reddit
 
 \subsection{Reddit API}
 why reddit ?
 
+\subsection{Swagger}
+
 What was our aim in styling? research of other social platforms.
+
+% ========================== Languages ========================== 
+\section{Languages}
+\subsection{JavaScript}
+
+\subsection{TypeScript}
+
+\subsection{HTML}
+
+\subsection{LaTeX}
 
 % ========================== Styling and UI  ========================== 
 \section{Styling and UI}
@@ -85,8 +152,10 @@ What was our aim in styling? research of other social platforms.
 
 \subsection{CSS}
 why?
+
 \subsection{Bootstrap}
 why?
+
 \subsection{Angular Material}
 why?
 
