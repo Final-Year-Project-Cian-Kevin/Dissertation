@@ -149,7 +149,9 @@ The REST API we setup is intended to give access to all aspects of the project i
 A big benefit of the API is all functionality of the application is available from the REST API. This allows for us to if we decided to, add a mobile application or create a monitoring tool to see the data and analyze it.
 
 \subsection{Security}
-Passport.js
+Routes altering data (POST, PUT, DELETE) requires the user to be authenticated to prevent data being altered by another user. We authenticated certain routes such as create a post to check who is creating this post, and to link to their profile but also so only they can post in their name. Authenticating routes such as comment, post, settings and following was a big part of the planning stage as we needed to figure out a way to stop intrusive behaviour from outside sources abusing the API.
+
+To add a layer of security to user requests and ensure no malicious requests are made by other user trying to impersonate another user we added a Node.js import called PassportJS. PassportJS is authentication middle-ware for Node.js. PassportJS allows
 
 \subsection{Swagger}
 What is swagger?
