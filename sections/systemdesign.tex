@@ -165,10 +165,12 @@ The presentation tier is based on the Angular front-end web framework. In contra
 The Angular services allow our application to interact and access data from our database via the node server. Thus keeping data retrieval separate to page functions. In the services we provide the logic to process HTTP requests to the API to perform CRUD operations on the data served by the Node.js/ExpressJS server. 
 
 \subsection{Page views}
-
+In this section we will look at some screen shots of the web application from the view of a PC web browser and on a Samsung Galaxy S6 mobile device. For each page a brief summary of the functionality of the page will be provided along with any input validation that was used. 
 How we designed the ui
 few screenshots off finished site
+
 \subsubsection{Log in Page}
+The log in page consists of of a username and password input box. In order to submit a login attempt both values must be supplied. The values are then authenticated on the server and if successful the server returns a JWT token that's stored in session storage and the user is redirected to the homepage view.  If the username is invalid the server will return a "Log in failed. User not found." error message to the view or in the case of an invalid password a "Incorrect password" message is returned.
 \begin{figure}[H]
 \centering
 \begin{minipage}{.75\textwidth}
@@ -186,6 +188,28 @@ few screenshots off finished site
 \end{figure}
 
 \subsubsection{Register Page}
+The register page allows a user to enter credentials for a new user profile. To submit a register attempt all fields are required. This page view contains numerous different aspects that must be validated:
+
+
+\begin{figure}[H]
+\begin{minipage}{.5\textwidth}  %listing bloc will have 50% of the line width 
+\lstset{0.6\textwidth, breaklines=true} %set your listing lines widths, and set breaklines to true
+\begin{itemize}
+\item Username : Required, Must be unique to server.
+\item firstname : Required.
+\item surname : Required.
+\item email : Required, Must contain '@' followed by '.' symbol, Must be unique to server.
+\item Password : Must be 8 characters and must match confirm password value.
+\end{itemize}
+
+\end{minipage}
+\qquad %space between listing bloc and the figure
+\begin{minipage}{0.4\textwidth} %figure will have the remaning 40% of the line width
+\includegraphics[width=.9\linewidth]{img/ui/signuperror.PNG} %the image must be resized or scaled if needed
+\caption{Register Validation}
+\end{minipage}
+\end{figure}
+
 \begin{figure}[H]
 \centering
 \begin{minipage}{.75\textwidth}
@@ -220,6 +244,30 @@ few screenshots off finished site
 \end{figure}
 
 \subsubsection{Settings Page}
+The settings page view allows a user to edit their current credentials and is accessed by clicking the settings tab on the navbar drop down menu. The form fields are prefilled from the users data retrieved by the server.
+
+\begin{lstlisting}[language=JavaScript,caption={Defining User Schema},captionpos=b,label={fig:userscema}]
+/**
+ * Set the form data in SettingsForm to the details of the current user.
+ * 
+ * @param id The current users id.
+ */
+setForm(id) {
+  this.userService.getProfile(id)
+    .subscribe(profile => {
+      // Must extract profile data from response.
+      this.profileinfo = profile[0];
+      // Form object
+      this.settingsForm.setValue({
+        email: this.profileinfo.email,
+        first_name: this.profileinfo.first_name,
+        surname: this.profileinfo.surname,
+        bio: this.profileinfo.bio
+      });
+    });
+}
+\end{lstlisting}
+ This page also allows the user to update or change their current profile image. Selecting the 'choose file' button pops up a file explorer window and allows the user to select an image. The chosen image is then shown in a preview tab so the user can have a peek prior to selecting the "Upload new profile image" button. This was achieved by importing the \textbf{ng2-file-upload} module and applying custom functions. The uploaded image is then saved in a image folder on the server and the users account is updated with the location to access this image. The uploader is also validated to only accept image files.
 \begin{figure}[H]
 \centering
 \begin{minipage}{.75\textwidth}
@@ -236,7 +284,8 @@ few screenshots off finished site
 \end{minipage}
 \end{figure}
 
-\subsubsection{Friends Page}
+\subsubsection{Friends Page} 
+The friends page is a view that allows a user to toggle a view between followers and following. This page can be accessed in two ways which render different views. If a user wants to view a list of their own followers and who they are following they can select the "Friends" button in the navbar drop down menu. If a user would like to view another users followers and following list a button "Follows" can be selected on the preferred users profile page. The lists contain cards that show a image avatar, username and bio for each user. To view a users profile from this view simply click on the username and the system redirects you to that users profile page.
 \begin{figure}[H]
 \centering
 \begin{minipage}{.75\textwidth}
@@ -271,6 +320,23 @@ few screenshots off finished site
 \end{minipage}
 \end{figure}
 
+\subsubsection{Posts Page}
+\subsubsection{About Page}
+\begin{figure}[H]
+\centering
+\begin{minipage}{.75\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{img/ui/about_PC.PNG}
+  \captionof{figure}{Web View}
+  \label{fig:aboutPC}
+\end{minipage}%
+\begin{minipage}{.25\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{img/ui/about_MOBILE.PNG}
+  \captionof{figure}{Mobile view}
+  \label{fig:aboutMobile}
+\end{minipage}
+\end{figure}
 \begin{itemize}
 \item Architecture, UML etc. An overview of the different components of the system. Diagrams etc… Screen shots etc.
 \end{itemize}
