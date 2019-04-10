@@ -5,7 +5,7 @@ In this chapter we will discuss the architecture and design of the \textbf{TechB
 
 
 \begin{figure}[H]
-\begin{minipage}{.5\textwidth}  %listing bloc will have 50% of the line width 
+\begin{minipage}{.4\textwidth}  %listing bloc will have 50% of the line width 
 \lstset{linewidth = 4cm, breaklines=true} %set your listing lines widths, and set breaklines to true
 \begin{itemize}
 \item Database \textbf{MongoDB}
@@ -15,7 +15,7 @@ In this chapter we will discuss the architecture and design of the \textbf{TechB
 
 \end{minipage}
 \qquad %space between listing bloc and the figure
-\begin{minipage}{0.4\textwidth} %figure will have the remaning 40% of the line width
+\begin{minipage}{0.6\textwidth} %figure will have the remaning 40% of the line width
 \includegraphics[scale=.4]{img/mvc.png} %the image must be resized or scaled if needed
 \caption{MEAN Stack}
 \end{minipage}
@@ -169,6 +169,47 @@ In this section we will look at some screen shots of the web application from th
 How we designed the ui
 few screenshots off finished site
 
+
+\subsubsection{Navigation Pane}
+The header component is injected into the main index.js view. This allows us to render the navigation pane at all times while the main content view is adapted to the selected page view. The header component contains a header logo displaying the image that was designed for the application and a navigation bar with numerous features. When designing the navbar we decided it must meet the following conditions: appealing, easy to use and fully functional, all whilst being fully responsive to changing screen sizes and different devices.
+
+To add the the functionality when a user enters the site and is not currently logged in the navbar contains a log in form that enables a user to log in. As long as a user is not logged in all other functionality from the navbar is disabled as seen in Figure ~\ref{fig:header} . To add to the pleasing aesthetic the navbar is also made sticky. Figure ~\ref{fig:headerStick} shows that when the page is scrolled down the header logo will scroll out of view and the navbar will stay located at the top of the page.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{img/ui/headerPC.PNG}
+  \captionof{figure}{Header}
+  \label{fig:header}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{img/ui/headerpcsticky.PNG}
+  \captionof{figure}{Sticky Navbar}
+  \label{fig:headerStick}
+\end{minipage}
+\end{figure}
+
+However when the user is logged in even more functionality is active. Shown in Figure  ~\ref{fig:headernodrop} relating general site functions three buttons with corresponding icons are added to redirect the user to the the Home, Make Post and About Us page. For functions related to the current user, a drop down menu was added along with the logged in users thumbnail photo and username. Selecting the arrow icon displayed in Figure\ref{fig:headerdrop} displays a drop down menu. This menu has options to render the Profile, Account Settings, Friends and Saved post pages. The Logout button in the drop down menu logs the user out, deletes the JWT token from session storage and redirects to the homepage. 
+\begin{figure}[H]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{img/ui/headernodrop.PNG}
+  \captionof{figure}{Navbar}
+  \label{fig:headernodrop}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{img/ui/headerdrop.PNG}
+  \captionof{figure}{Navbar Dropdown active}
+  \label{fig:headerdrop}
+\end{minipage}
+\end{figure}
+
+
+
 \subsubsection{Log in Page}
 The log in page consists of of a username and password input box. In order to submit a login attempt both values must be supplied. The values are then authenticated on the server and if successful the server returns a JWT token that's stored in session storage and the user is redirected to the homepage view.  If the username is invalid the server will return a "Log in failed. User not found." error message to the view or in the case of an invalid password a "Incorrect password" message is returned.
 \begin{figure}[H]
@@ -244,9 +285,9 @@ The register page allows a user to enter credentials for a new user profile. To 
 \end{figure}
 
 \subsubsection{Settings Page}
-The settings page view allows a user to edit their current credentials and is accessed by clicking the settings tab on the navbar drop down menu. The form fields are prefilled from the users data retrieved by the server.
+The settings page view allows a user to edit their current credentials and is accessed by clicking the settings tab on the navbar drop down menu. The form fields are pre-filled from the users data retrieved by the server.
 
-\begin{lstlisting}[language=JavaScript,caption={Defining User Schema},captionpos=b,label={fig:userscema}]
+\begin{lstlisting}[language=JavaScript,caption={Auto fill form data},captionpos=b,label={fig:userscema}]
 /**
  * Set the form data in SettingsForm to the details of the current user.
  * 
@@ -322,6 +363,7 @@ The friends page is a view that allows a user to toggle a view between followers
 
 \subsubsection{Posts Page}
 \subsubsection{About Page}
+The purpose of the about page view is to give the user an insight into the project. The view is separated into three sections with each item being displayed on its own card. Each card consists of an image, a link to the resource, a summary of the resource link and also some brief information on that item. The Team section is a over view of the developers of the web application with clickable link to view our Github profiles. The Documentation section contains links to the project source code, dissertation and the Swagger documentation for the API. The third section is used to provide links to resources and give information on some of the components used in the project such as  MEAN Stack, MongoDB, Express.js, Angular, Node.JS, Reddit API, Passport.JS, HTML and CSS.
 \begin{figure}[H]
 \centering
 \begin{minipage}{.75\textwidth}
