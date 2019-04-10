@@ -1,13 +1,8 @@
 \chapter{System Design}
-In this chapter we will discuss the architecture and design of the \textbf{TechBook} system. In the following sections we will present code snippets and visual diagrams to help portray a basic understanding of the application design. The architecture is modeled on what is known as the MEAN stack and which resembles a three tier architecture. MEAN is a free open-source software stack for building dynamic websites and supports the MVC (Model View Controller) architecture. 
+In this chapter we will discuss the architecture and design of the \textbf{TechBook} system. In the following sections we will present code snippets and visual diagrams to help portray a basic understanding of the application design. The architecture is modeled on what is known as the MEAN stack and which resembles a three tier architecture. MEAN is a free open-source software stack for building dynamic websites and supports the MVC (Model View Controller) architecture. The contents of this chapter will be seperated into the Data Tier, Logic Tier and Presentation Tier.
 
 
 
-% ========================== Architecture ========================== 
-\section{Architecture}
-What architecture looks like?
-uml?
-program flow?use caase diagram
 
 \begin{figure}[H]
 \begin{minipage}{.5\textwidth}  %listing bloc will have 50% of the line width 
@@ -27,10 +22,10 @@ program flow?use caase diagram
 \end{figure}
 
 % ========================== Databases ========================== 
-\section{Databases}
+\section{Database}
 For the database adapting the MEAN architecture we used MongoDB.
 
-\section{Mongoose}
+\subsection{Mongoose}
 Harnessing the true power of the Mean stack we used the mongoose object modelling package for Node. Mongoose enabled us to have access to the full suite of MongoDB commands to perform CRUD (Create, Read, Update, Delete) operations. 
 
 
@@ -149,6 +144,8 @@ UserSchema.methods.comparePassword = function (passw, cb) {
   });
 };
 \end{lstlisting}
+
+\subsection{JSON Web tokens}
 % ========================== Authentication ========================== 
 \section{Authentication}
 What database like
@@ -159,7 +156,16 @@ How we designed api calls/
 insert info from swagger
 
 % ========================== UI ========================== 
-\section{UI}
+\section{Client UI}
+The presentation tier is based on the Angular front-end web framework. In contrast to traditional multiple page web applications the Client is presented as a single page application in which components are injected into. In this section we will look at the Angular app structure, the services which allow us to interact with our node js server and the finished view of the pages.
+
+\subsection{Angular folder structure}
+
+\subsection{Angular Services}
+The Angular services allow our application to interact and access data from our database via the node server. Thus keeping data retrieval separate to page functions. In the services we provide the logic to process HTTP requests to the API to perform CRUD operations on the data served by the Node.js/ExpressJS server. 
+
+\subsection{Page views}
+
 How we designed the ui
 few screenshots off finished site
 
