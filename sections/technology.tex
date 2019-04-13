@@ -1,7 +1,7 @@
 \chapter{Technology Review}
 This chapter will cover the technical side of our project, by looking back on the technologies that made up the final revision of the project. We will explain the different technologies we added and how they were implemented through the project. We will look over the web stack we used and the technologies we added in order to create a more robust and useful social media site. We will go over why we used the given technologies and the benefits we saw in them over others.
 
-% ========================== Frame Work  ========================== 
+% ========================== Framework  ========================== 
 \section{MEAN STACK/Framework}
 The mean stack is intended to provide a simple and fun starting point for cloud native full-stack JavaScript applications. MEAN is a set of Open Source components that together, provide an end-to-end framework for building dynamic web applications; starting from the top (code running in the browser) to the bottom (database). 
 
@@ -89,7 +89,6 @@ NPM is the world’s largest software registry. NPM allows developers access to 
 
 Node modules is a powerful resource with lots of packages that adds great functionality to the developer's project such as user authentication with Passport.js.
 
-
 % ========================== DEPLOYMENT  ========================== 
 \section{Deployment}
 For code deployments we looked at numerous cloud service provides to figure out what would be the best service to take use of for our project. We looked at Google Cloud, Heroku and AWS as the cloud service providers. Although these are only a fraction of the cloud service providers online, we found they were received very well by our supervisors as a way of deployment. 
@@ -154,11 +153,99 @@ Routes altering data (POST, PUT, DELETE) requires the user to be authenticated t
 To add a layer of security to user requests and ensure no malicious requests are made by other user trying to impersonate another user we added a Node.js import called PassportJS. PassportJS is authentication middle-ware for Node.js. PassportJS allows
 
 \subsection{Swagger}
-Swagger is an open source software framework sponsored by SmartBear. Swagger is used to create, document and consume  RESTful Web services. Swagger offers an easy way to document RESTful Web services by using Swagger documentation definitions and Swagger UI to create 
+Swagger is an open source software framework sponsored by SmartBear. Swagger is used to create, document and consume  RESTful Web services. Swagger offers an easy way to document RESTful Web services by using Swagger documentation definitions and Swagger UI to document an API and give example on how the API works. Swagger works by having the developer add comments similar to java-docs in order to document a route telling swagger the components of the route and the model it uses. Giving swagger this information swagger will use the data to create a JSON object with all the data about the API in a format that can be used by the developer for other means or to be used in conjunction with swagger UI, which we will discuss later.
 
-What is swagger?
-Why use it?
-Swagger UI
+\subsubsection{Swagger.json}
+As we discussed above Swagger is used to document a route. But how does it do that? Swagger creates a JSON object which it hosts at a given route in order to be accessible by developers for their own purposes, or by using Swagger UI.
+
+The JSON part of Swagger is where the swagger documentation is rendered into a machine readable format.
+
+\begin{minted}{js}
+{
+    info: { 
+        title: "Node Swagger API",
+        version: "1.0.0",
+        description: "Api file for swagger"
+    },
+    host: "34.243.30.50:3000",
+    basePath: "/",
+    swagger: "2.0",
+    paths: {},
+    definitions: {},
+    responses: { },
+    parameters: { },
+    securityDefinitions: { }
+}
+\end{minted}
+
+Above is an example from the hosted project on AWS. As we can see this is a very basic model for without any route or definitions. Swagger includes basic information about the API such as the host and general Swagger information such as version and title. Swagger includes the host and base-path used by the API, with a list of definitions and paths about each API route.
+
+\begin{minted}{js}
+paths: {
+    /api: {
+        get: {
+        tags: [
+            "books"
+            ],
+            description: "Returns all books",
+            produces: [
+            "application/json"
+            ],
+            responses: {
+                200: {
+                    description: "An array of books",
+                    schema: {
+                        $ref: "#/definitions/book"
+                    }
+                }
+            }
+        },
+    },
+},
+\end{minted}
+
+An example of one of the paths contained in the paths object array. In paths we have a list of paths documented using Swagger, these paths contain information about the path such as the title in which the path could be classified under, example above is 'Books'. With the title we can classify different paths that may handle something to do with 'books' and thus we may want to organizes the paths under 'books'. The path also contains the schema used which is very important in order to understand how the API route operates. Does the path return JSON?, XML?, raw text?
+
+\begin{minted}{js}
+definitions: {
+    book: {
+        properties: {
+            isbn: {
+                type: "string"
+            },
+            title: {
+                type: "string"
+            },
+            author: {
+                type: "string"
+            },
+            description: {
+                type: "string"
+            },
+            published_year: {
+                type: "string"
+            },
+            publisher: {
+                type: "string"
+            }
+        }
+    }
+},
+\end{minted}
+
+Using the definition in conjunction with the path we can get a better picture of how to API route works and what data is needed for it to operate correctly. The definitions contains definitions for each route and each definition inside definitions contains properties which describe the routes data and what type of data each property is.
+
+\subsubsection{Swagger UI}
+Swagger UI is a visual representation of the API documented using Swagger. Swagger UI is a great as it enables developers to save a lot of time in documenting an API, as it uses the Swagger JSON to visualize the API. 
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{img/swaggerUI.PNG}
+  \caption{Swagger UI}
+  \label{fig:NPM}
+\end{figure}
+
+Using Swagger UI we can use the hosted JSON from the Swagger Documentation to display the available routes in the API. Each route is categorized and sorted using the Swagger JSON. Each option under the category will use the path and definition of the Swagger JSON to create a visualized representation of the API and allow testing of the API.
+
 
 % ========================== Languages ========================== 
 \section{Languages}
