@@ -195,7 +195,7 @@ paths: {
                 200: {
                     description: "An array of books",
                     schema: {
-                        $ref: "#/definitions/book"
+                        \$ref: "#/definitions/book"
                     }
                 }
             }
@@ -246,16 +246,76 @@ Swagger UI is a visual representation of the API documented using Swagger. Swagg
 
 Using Swagger UI we can use the hosted JSON from the Swagger Documentation to display the available routes in the API. Each route is categorized and sorted using the Swagger JSON. Each option under the category will use the path and definition of the Swagger JSON to create a visualized representation of the API and allow testing of the API.
 
-
 % ========================== Languages ========================== 
 \section{Languages}
 \subsection{JavaScript}
+JavaScript is the backbone of the web. JavaScript is responsible for front-end web development processes. Without JavaScript a web page would have no functionality to communicate with the server-side functions in order to save or read dynamic data. JavaScript runs the web, both front-end with JavaScript or TypeScript. 
+
+A very basic way to think of JavaScript is that HTML is your bone structure. It holds everything together with a solid foundation. CSS is your skin, it's what everyone sees and interacts with. So JavaScript is your brain, heart and other organs that make you, you. JavaScript is what makes everything function in an effective way.
+
+\subsubsection{Database}
+JavaScript is found in the database with MongoDB, which stores data using JSON (JavaScript Object Notation). MongoDB saves database entries using JSON to store elements of that collection. As we explained earlier what JSON is and how it stores classes into objects.
+
+\subsubsection{Server-Side}
+On the server-side we used Node.js. Node.js as we discussed above is what allows JavaScript to run outside the browser. JavaScript was used as the serer-side processing which handled routing for the API and for the Angular front-end.
+
+\subsubsection{Front-End}
+The front end section of the web application uses TypeScript which is a super-set of JavaScript which we will talk about in greater detail below.
+
+in the server-side API handling routing for the web application. 
 
 \subsection{TypeScript}
+TypeScript which is a super-set of JavaScript. JavaScript code is valid in a TypeScript environment, with some exceptions. A huge benefit over JavaScript is that TypeScript made it harder to create bugs and made JavaScript more manageable in larger systems.
+
+\vspace{5mm}
+
+JavaScript:
+\begin{minted}{js}
+let name = 'TechBook',
+users = 500,
+isThreeTier = true;
+\end{minted}
+
+TypeScript:
+\begin{minted}{js}
+let name: string = 'TechBook',
+users: number = 500,
+isThreeTier: boolean = true;
+\end{minted}
+
+The biggest change and most liked feature of TypeScript is variables are declared by using a variable type such as 'string', 'number' and 'boolean'. This is a big change over JavaScript where the variable type is interpreted as to how the developer manages the variable.
 
 \subsection{HTML}
+HTML (Hypertext Markup Language) is a markup language for creating web pages. HTML uses tags to define what sections of the web page do what. 
+
+HTML Example:
+\begin{minted}{html}
+<h1> Title </h1>
+<p> Paragraph</p>
+<a href= "github.com"> Link </a>
+\end{minted}
+
+HTML Rendered: \\
+\textbf{Title} \\
+Paragraph \\
+\href{http://www.sharelatex.com}{Link}
+
+\vspace{5mm}
+
+Every web-page on the internet is a hypertext document. A hypertext document differs from a raw text document by allowing images, formatting and links. HTML is is what hold all the components of a web-page together. 
 
 \subsection{LaTeX}
+LaTeX is a text processor that is built around a markup language. Like HTML LaTeX uses tags to define a command or action to display text in a certain way. These tags work very similar to HTML where these tags are only seen on the source of the document and are hidden when the document is compiled into a format such as a PDF.
+
+LaTeX Example:
+\begin{minted}{tex}
+\chapter{Technology Review}
+\section{Languages}
+\subsection{LaTeX}
+Some text about LaTeX
+\end{minted}
+
+LaTeX would then compile this text into a document, like this one, where it renders the chapter the section and subsection of that chapter and would compile the table of contents to include the new chapter and sections.
 
 % ========================== Styling and UI  ========================== 
 \section{Styling and UI}
