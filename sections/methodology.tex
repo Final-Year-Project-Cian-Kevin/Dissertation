@@ -66,17 +66,29 @@ The term Sprint is mainly used in the Scrum framework of the Agile methodology a
   \item What backlog items can we implement in the next sprint?
 \end{enumerate}
 
-
-
-
-
-
-
 % ========================== Choice of tech  ========================== 
-\section{Choice of tech }
-tech used and why
- Selection criteria for algorithms, languages, platforms and technologies.
- 
+\section{Selection Criteria}
+During the initial planning phases of the project, we evaluated numerous varying frameworks and technology stacks. From Java based Spring framework to Python's flask. As a team sat down to decide on the choice of technology and frameworks we would use. To do this we evaluated our project as a whole and began designing a criteria that we would base our final decision on. 
+
+The criteria for selecting an architecture was based on :
+\begin{enumerate}
+  \item The type of web application we are trying to build.
+  \item Implementation of 3 tier architecture.
+  \item Server side must be easy to write and maintainable.
+  \item Languages that need to be improved or learned to use framework.
+  \item Use of database alongside server.
+\end{enumerate}
+Overall, based on the above criteria, we decided th         at the best solution for our project was to use the \textbf{MEAN} stack framework supported by Angular CLI. The Mean Stack provides multiple benefits which simplify the development of single page web applications with a 3-tier architecture. 
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{img/msd.png}
+  \caption{Mean Stack Development}
+  \label{fig:mena-stack}
+\end{figure}
+
+A major benefit of the MEAN stack is that it would enable us to develop everything from the Angular client ,to the Node server API all using JavaScript libraries. This allowing us to gain vast knowledge and increase our skill set in all areas of full-stack JavaScript applications. Another benefit of using MEAN stack is the increasing number of JavaScript libraries and Node modules available to aid development such as \textit{Mongoose} for adapting \textit{MongoDB} and \textit{Passport.Js} for server side authentication. In Section \ref{meanstack} we delve into more detail, giving a much broader explanation of the MEAN stack and the features that made it the go-to choice for Techbook.
+
+
 % ========================== Testing , pass fail metrics  ========================== 
 \section{Testing , Success and Failure Metrics} 
 As defined briefly in Section \ref{metrics} \texttt{Metrics for success or failure} our conditions were mainly focused and evaluated by user interaction. With the intention of monitoring  success we decided on tests to evaluate each metric:
