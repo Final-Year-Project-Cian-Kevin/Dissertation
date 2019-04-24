@@ -319,7 +319,21 @@ LaTeX would then compile this text into a document, like this one, where it rend
 
 % ========================== Styling and UI  ========================== 
 \section{Styling and UI}
-What was our aim in styling? research of other social platforms.
+In this section we will talk about the different technologies we used to develop the front-end user interface for our website. 
+
+User interfaces are an extremely important aspect of website design. As more people have access to the internet using different hardware and software to access website, it has become harder to develop a streamlined user interface that works across all devices. 
+
+Things that can affect user interface development:
+\begin{itemize}
+    \item Aspect Ratio
+    \item Resolution
+    \item Browser
+    \item Mobile/Desktop
+\end{itemize}
+
+Creating an intuitive user interface that works across most devices is difficult because of the above reasons. Using different technologies we will discuss below often these technologies take care of many of these issues. As long as the developer keeps them in mind and tries to use the functionality they provide to make the website accessible to as much people as possible.
+
+Mobile has become a major part of accessing the internet as smart-phones have become a bigger part in peoples lives and can be used anywhere. Developing a user interface that works on both desktop PCs and mobile smart phones can be challenging. Developing a website that works on both devices was very important to us to keep up with modern trends.
 
 \subsection{CSS}
 As we discussed briefly in the previous section, CSS is the  skin of the project. It's what most sites use to make their appearance more professional and not just a wall of text and buttons. CSS stands for 'Cascading Style Sheets. It's used by nearly all websites to improve their appearance and makes a website stand out from each other.
@@ -359,9 +373,58 @@ Angular Material is developed bu Google and was developed to meet the demand of 
 Angular Material was birthed from the now defunct service. Angular Material was made to create a Bootstrap like alternative. Although Angular Material is an alternative to Bootstrap to develop front-end user interfaces, Bootstrap is often used in conjunction with Angular Material.
 
 % ========================== Other Technology's  ========================== 
-\section{Other Technology's/dev environment}
-Other technology used
+\section{Other Technologies/Development environment}
+In this section we will go over the technologies we used to develop and test the web application.
+
 \subsection{Visual Studio Code}
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{img/opengraph-home.png}
+  \caption{Visual Studio Code View}
+  \label{fig:VSC}
+\end{figure}
+
+Use used Microsoft's Visual Studio Code as an integrated development environment as it was perfect for what we needed. We needed an integrated development environment that didn't just support one language. We needed one that supported, JavaScript, TypeScript, HTML, CSS and LaTeX. Visual Studio Code offers a specialized extensions that make developing with these technologies more initiative.
+
+\subsubsection{Extensions}
+Extensions for Visual Studio Code are add-ons developed by others to make the development environment in Visual Studio Code better for a specific task.
+
+\paragraph{HTML CSS Support}
+HTML CSS Support extension is just what it sounds like, it adds better support for HTML and CSS in Visual Studio Code. Although you can easily write code in Visual Studio Code for HTML and CSS this extension adds features that make the development of HTML and CSS like developing Java using Eclipse would.
+
+\begin{itemize}
+    \item Class attribute completion
+    \item Id attribute completion.
+    \item Supports Zen Coding completion for class and id attributes.
+    \item Scans workspace folder for CSS and SCSS files.
+    \item Supports remote CSS files.
+\end{itemize}
+
+It's small features like these that make developing HTML and CSS a little easier, especially when developing a full stack website. HTML CSS Support extension made developing with HTML and CSS feel more natural in Visual Studio Code.
+
+\paragraph{JavaScript (ES6) Code Snippets}
+JavaScript (ES6) Code Snippets is an extension which adds shortcuts for common JavaScript and Typescript functionality such as for loop, console log and class constructors.
+
+Supports:
+\begin{itemize}
+    \item JavaScript (.js)
+    \item TypeScript (.ts)
+    \item JavaScript React (.jsx)
+    \item TypeScript React (.tsx)
+    \item Html (.html)
+    \item Vue (.vue)
+\end{itemize}
+
+The extension supporting both JavaScript and TypeScript was what sold us on the extension as those two languages made up the majority of our code-base. 
+
+Using the extension is very easy once you know a few of the shortcuts and how to use them. An example of use would be typing 'clg' and pressing TAB which would convert 'clg' to 'console.log();'. The extension made getting something setup easy such as 'fof' and pressing TAB becoming 'for(const item of object) {}'. Although very basic, it made writing small code snippets easier and more in line with IDEs such as Eclipse with 'sysout' and then pressing CTRL-SPACE which produced 'System.out.println'.
+
+\paragraph{LaTeX Workshop}
+LaTeX Workshop was used early on in development. The extension provided live PDF view to see how changes looked and has came with quality of life features such as shortcuts.
+
+LaTeX Workshop made developing LaTeX in Visual Studio Code easier with the features it provided.
+
 \subsection{Browsers}
-chrome firefox
-\subsection{Swagger}
+
+\subsubsection{Chrome}
+
+\subsubsection{Firefox}
