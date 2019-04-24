@@ -1,5 +1,5 @@
 \chapter{System Design}
-In this chapter we will discuss the architecture and design of the \textbf{TechBook} system. In the following sections we will present code snippets and visual diagrams to help portray a basic understanding of the application design. The architecture is modeled on what is known as the MEAN stack and which resembles a three tier architecture. MEAN is a free open-source software stack for building dynamic websites and supports the MVC (Model View Controller) architecture. The contents of this chapter will be seperated into the Data Tier, Logic Tier and Presentation Tier.
+In this chapter we will discuss the architecture and design of the \textbf{TechBook} system. In the following sections we will present code snippets and visual diagrams to help portray a basic understanding of the application design. The architecture is modeled on what is known as the MEAN stack and which resembles a three tier architecture. MEAN is a free open-source software stack for building dynamic websites and supports the MVC (Model View Controller) architecture. The contents of this chapter will be separated into the Data Tier, Logic Tier and Presentation Tier.
 
 
 
@@ -22,7 +22,7 @@ In this chapter we will discuss the architecture and design of the \textbf{TechB
 \end{figure}
 
 % ========================== Databases ========================== 
-\section{Database}
+\section{Data Tier}
 For the database adapting the MEAN architecture we used MongoDB.
 
 \subsection{Mongoose}
@@ -144,19 +144,19 @@ UserSchema.methods.comparePassword = function (passw, cb) {
   });
 };
 \end{lstlisting}
-
+\section{Logic Tier}
 \subsection{JSON Web tokens}
 % ========================== Authentication ========================== 
-\section{Authentication}
+\subsection{Authentication}
 What database like
 
 % ========================== API Calls ========================== 
-\section{API/HTTP}
+\subsection{API/HTTP}
 How we designed api calls/
 insert info from swagger
 
 % ========================== UI ========================== 
-\section{Client UI}
+\section{Application Tier}
 The presentation tier is based on the Angular front-end web framework. In contrast to traditional multiple page web applications the Client is presented as a single page application in which components are injected into. In this section we will look at the Angular app structure, the services which allow us to interact with our node js server and the finished view of the pages.
 
 \subsection{Angular folder structure}
@@ -267,7 +267,90 @@ The register page allows a user to enter credentials for a new user profile. To 
 \end{minipage}
 \end{figure}
 
-\subsubsection{Profile Page}
+\subsubsection{Profile Page} 
+The profile page is used to view a users details (profile image, avatar, name, username email and when they registered) and activity (created posts and comments on other posts). By using \textbf{Angular Material Components} the page has been split into a grid to display different sections as seen in the Figure \ref{fig:profileHTML} snippet. The grids are assigned to profile info, recent posts and recent comments. Harnessing the functionality of \textbf{Angular Material Components} enables the page to be fully responsive. As you can see in Figure \ref{fig:profilePC} the layout is set to have profile info to the left, while recent comments and posts are stacked on top each other to he right. However as the size of the screen scales, so does the view the grid components that will shrink as the screen size decreases and in the case of a mobile device as seen in Figure \ref{fig:profileMOBILE} the components are stacked vertically on top of one another. 
+
+\begin{lstlisting}[language=HTML,caption={Angular Material Component Grid},captionpos=b,label={fig:profileHTML}]
+<div class="mdc-layout-grid">
+  <div class="mdc-layout-grid__inner">
+
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+      <mat-card class="profile-card">
+      .......
+      </mat-card>
+    </div>
+
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8">
+      <div class="mdc-layout-grid__inner ">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+
+
+          <!-- If the user has made any posts -->
+          <div *ngIf="postsUser.length > 0">
+            <h1>Recent Posts:</h1>
+         ........
+          </div>
+
+          <!-- If the user hasn't made any post -->
+          <div *ngIf="!postsUser.length > 0">
+            <h1>No posts to show</h1>
+            <p>Tell {{profile.username}} to get posting!</p>
+          </div>
+        </div>
+        
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+
+          <!-- If the user has made any comments -->
+          <div *ngIf="commentsUser.length > 0">
+            <h1>Recent Comments:</h1>
+            <!-- Comment card -->
+            <mat-card class="comment-card" *ngFor="let commentUser of commentsUser">
+              ......
+            </mat-card>
+          </div>
+
+          <!-- If the user hasn't made any comments -->
+            <h1>No comments to show</h1>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><div *ngIf="!commentsUser.length > 0">
+          
+</div>
+\end{lstlisting}
+
+The profile page is used for both viewing a users own profile and viewing another users profile and is changed dynamically. When viewing another users account a follow/unfollow option appears. Once a user follows another user the button changes to unfollow and visa versa. Viewing your own profile disables these options and allows the user to view pages they are subscribed to. This is achieved by a method in the \textit{userService} shown in Figure \ref{fig:profileJWT} that checks if there is a valid JWT or \textit{Json Web Token} for that user and adjust the options accordingly Figure \ref{fig:profilefollow}.
+
+\begin{lstlisting}[language=JAVASCRIPT,caption={Validate JWT},captionpos=b,label={fig:profileJWT}]
+  // Check if a user is logged in
+  isLoggedIn(): boolean {
+    var currentToken = this.getJwtToken();
+    if (currentToken) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  \end{lstlisting}
+\begin{lstlisting}[language=HTML,caption={Follow / Unfollow option},captionpos=b,label={fig:profilefollow}]
+       <mat-card-actions>
+          <!-- If user is logged in -->
+          <div *ngIf="userAPI.isLoggedIn()">
+            <button mat-button [routerLink]="['/saved/', profile.username]">SUBSCRIBED POSTS</button>
+            <button mat-button [routerLink]="['/follow/', profile.username]">FRIENDS</button>
+            <button *ngIf="!isFollowing && !isUser" mat-button (click)="follow(profile._id)">FOLLOW</button>
+            <button *ngIf="isFollowing && !isUser" mat-button (click)="unFollow(profile._id)">UNFOLLOW</button>
+          </div>
+          <!-- If user is not logged in -->
+          <div class="user-buttons" *ngIf="!userAPI.isLoggedIn()">
+            <button mat-button [routerLink]="['/saved/', profile.username]">SUBSCRIBED POSTS</button>
+            <button mat-button [routerLink]="['/follow/', profile.username]">FOLLOW STUFF</button>
+          </div>
+        </mat-card-actions>
+\end{lstlisting}
+
 \begin{figure}[H]
 \centering
 \begin{minipage}{.75\textwidth}
