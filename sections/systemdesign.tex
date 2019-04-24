@@ -144,8 +144,28 @@ UserSchema.methods.comparePassword = function (passw, cb) {
   });
 };
 \end{lstlisting}
+
 \section{Logic Tier}
+
 \subsection{JSON Web tokens}
+For the purpose of security we used JSON Web tokens to validate that a legitimate user is logged into the system and prevent unauthorised access. \textit{JSON Web Tokens are an open, industry standard RFC 7519 method for representing claims securely between two parties}\cite{jwt}. A unique JWT token is created in accordance with the offical JWT standard. A users token is signed with the username, password and an expiration date that renders the token invalid after a specifed time has passed as seen below. 
+
+\begin{lstlisting}[language=JAVASCRIPTcaption={Creating a JSON Web Token},captionpos=b,label={fig:jwttoken}]
+// Method to generate JWT token
+UserSchema.methods.generateJWT = function () {
+  var today = new Date();
+  var exp = new Date(today);
+  exp.setDate(today.getDate() + 60);
+
+  return jwt.sign({
+    id: this._id,
+    username: this.username,
+    exp: parseInt(exp.getTime() / 1000),
+  }, config.secret);
+};
+\end{lstlisting}
+
+This token can be used for many types of verification. On the client or presentation tier the JWT is returned from the server after a user has successfully logged in and is stored in local storage. This allows the system to check validity of the user further allowing the restriction/ restriction of components. For more on how the \textit{Json Web Tokens} are used on the presentation tier see Section \ref{loginpage}.
 % ========================== Authentication ========================== 
 \subsection{Authentication}
 What database like
@@ -210,7 +230,8 @@ However when the user is logged in even more functionality is active. Shown in F
 
 
 
-\subsubsection{Log in Page}
+\subsubsection{Log in Page}  \label{loginpage}
+
 The log in page consists of of a username and password input box. In order to submit a login attempt both values must be supplied. The values are then authenticated on the server and if successful the server returns a JWT token that's stored in session storage and the user is redirected to the homepage view.  If the username is invalid the server will return a "Log in failed. User not found." error message to the view or in the case of an invalid password a "Incorrect password" message is returned.
 \begin{figure}[H]
 \centering
