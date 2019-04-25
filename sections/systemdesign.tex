@@ -1,7 +1,10 @@
 \chapter{System Design}
-In this chapter we will discuss the architecture and design of the \textbf{TechBook} system. In the following sections we will present code snippets and visual diagrams to help portray a basic understanding of the application design. The architecture is modeled on what is known as the MEAN stack and which resembles a three tier architecture. MEAN is a free open-source software stack for building dynamic websites and supports the MVC (Model View Controller) architecture. The contents of this chapter will be separated into the Data Tier, Logic Tier and Presentation Tier.
+In this chapter we will discuss the architecture and design of the \textbf{TechBook} system. In the following sections we will present code snippets and visual diagrams to help portray a basic understanding of the application design. The architecture is modeled on what is known as the MEAN stack and which resembles a three tier architecture. MEAN is a free open-source software stack for building dynamic websites and supports the MVC (Model View Controller) architecture. The contents of this chapter will be begin with a brief overview of the flow of the MEAN stack followed by a more in depth portrayal separated into the Data Tier, Logic Tier and Presentation Tier.
 
+\section{Overview}
+The Presentation tier uses Angularjs, being a client side JavaScript language it is the the first one to process the request made by the client. The request is then sent to the Logic-tier which is a Nodejs server side JavaScipt language. Then the request enters the third phase using ExpressJS to make a request to the Data tier.
 
+From that point, the data is retrieved  from the MongoDB and the response is returned to Expressjs. Finally NodeJS takes the data back from ExpressJS and the data is returned to the Presentation tier to display the result.
 
 
 \begin{figure}[H]
@@ -29,7 +32,7 @@ For the database adapting the MEAN architecture we used MongoDB.
 Harnessing the true power of the Mean stack we used the mongoose object modelling package for Node. Mongoose enabled us to have access to the full suite of MongoDB commands to perform CRUD (Create, Read, Update, Delete) operations. 
 
 
-To use mongoose we used the following command in the project directory to add it to our Node project:
+To use mongoose we must first connect the logic tier to the data tier. We used the following command in the project directory to add it to our Node project:
 \begin{minted}{console}
 npm install mongoose --save
 \end{minted}
@@ -146,6 +149,25 @@ UserSchema.methods.comparePassword = function (passw, cb) {
 \end{lstlisting}
 
 \section{Logic Tier}
+
+The Logic tier is where the Web API service acts as the doorway to all business logic and data storage.
+Here we perform more complicated computations and sequencing of events allowing us to manipulate data by creating, reading, updating or deleting. Some events are user driven such as editing a profile and some run periodically such as generating posts from the Reddit API. Due to NodeJS's non-blocking IO calls and light-weight implementation, its enables the application to scale handling thousands of concurrent connections. Being written in the NodeJS JavaScript it is perfect for connecting our Data tier to our Presentation tier. The Logic tier also provides authentication to ensure no unauthorised acces is given to the database.
+
+% ========================== Authentication ========================== 
+\subsection{Authentication}
+With the purpose of security and the recent rise in data leaks making social media the biggest data breach threat \cite{dataleaks} the application was designed to secure data when a user is calling protected API routes.
+
+At a high level the components of the authentication flow are as follows:
+\begin{itemize}
+    \item The user data is stored in MongoDB, with the passwords hashed prior to saving.
+    \item CRUD functions are built in an Express API such as login, register, get profile and update. 
+    \item The Angular application calls the API and deals with the responses.
+    \item The Express API generates a JSON Web Token upon registration and passes this to the Angular application when a user succesfully logs in.
+    \item The Angular application stores the JWT in local storage to maintain the user’s session.
+    \item The Angular application checks the validity of the JWT when displaying protected views.
+    \item The Angular application passes the JWT back to Express for validation when calling protected API routes.
+\end{itemize}
+   
 % ========================== JSON Web tokens ========================== 
 
 \subsection{JSON Web Tokens}
@@ -168,9 +190,54 @@ UserSchema.methods.generateJWT = function () {
 
 This token can be used for many types of verification. On the client or presentation tier the JWT is returned from the server after a user has successfully logged in and is stored in local storage. This allows the system to check validity of the user further allowing the restriction/ restriction of components. For more on how the \textit{Json Web Tokens} are used on the presentation tier see Section \ref{loginpage}.
 
-% ========================== Authentication ========================== 
-\subsection{Authentication}
-What database like
+% ========================== Server Logging ========================== 
+\subsection{Server Logging}
+For development and operation purposes we created a Node module log system on the server. A server logging system boasts many advantages for both the debugging and monitoring the API of the application. By setting up an exportable logger in the \textit{config} folder and importing the logger into the API routes, we can easily debug and monitor information and errors on the server.
+
+The logs required for the system were information logs, error logs and debug logs. The logs are located in \textit{logs} directory on the server and separated into \textit{debug.txt}, \textit{info.txt} and \textit{error.txt}. When a call to log a message is executed  the appropriate file is appended with a time stamp and the message. Figure \ref{fig:serverlogger} displays a shortened version of the logging implementation.
+
+\begin{lstlisting}[language=JAVASCRIPT,caption={Server Logging},captionpos=b,label={fig:serverlogger}]
+// Make logger exportable so any file can reference it
+var Logger = (exports.Logger = {});
+
+// Creates folder for logs if one doesn't exsist
+if (!fs.existsSync('./logs')){
+    fs.mkdirSync('./logs');
+}
+
+// Create 3 write streams to allow to append info, error and debug logs to different streams.
+var errorStream = fs.createWriteStream("./logs/error.txt");
+
+// Append error message to log file along with the current date
+Logger.error = function(msg) {
+  var message = new Date().toISOString() + " : " + msg + "\n";
+  errorStream.write(message);
+};
+\end{lstlisting}
+
+To use the logger we simply call the error/debug/info function as shown in Figure \ref{fig:serverlog} when an error occurs following a failed registration.
+
+\begin{lstlisting}[language=JAVASCRIPT,caption={Server Log call from API},captionpos=b,label={fig:serverlog}]
+// Import logger to handle server logging. 
+var logger = require("../config/serverlogger").Logger;
+
+if (!req.body.username || !req.body.password) {
+    logger.error("[Register] : user attempted signup with no username or password");
+    res.json({
+      success: false,
+      msg: 'Please enter username and password.'
+    });
+  }
+\end{lstlisting}
+
+The message is then appended to the log file allowing us to easily view the activity on the server. Below is an example of the \textit{error.txt} after an error has been logged.
+
+\begin{lstlisting}[language=JAVASCRIPT,caption={error.txt log file},captionpos=b,label={fig:errorlog}]
+2019-04-10T18:30:49.616Z : [Register] : user attempted register with duplicate username
+2019-04-10T18:30:49.616Z : [Register] : user attempted register with duplicate email
+2019-04-10T18:30:49.616Z : [Login] : user attempted login with incorrect password
+2019-04-10T18:30:49.616Z : [Register] : user attempted signup with no username or password
+\end{lstlisting}
 
 % ========================== API Calls ========================== 
 \subsection{API/HTTP}
