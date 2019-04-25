@@ -1,5 +1,5 @@
 \chapter{System Evaluation} \label{eval}
-Reflecting on the objectives discussed in \textit{1.1: ProjectObjectives} ,the following is a condensed initial list of objectives for both the dissertation and applied aspects this project: 
+As discussed in section \textit{1.1: Project Objectives}, we will now expand on the system implemented in this project.
 
 \paragraph{Dissertation}
 \begin{itemize}
@@ -19,13 +19,36 @@ Reflecting on the objectives discussed in \textit{1.1: ProjectObjectives} ,the f
 
 % ========================== Testing ========================== 
 \section{Testing}
-is it robust?
-what type of testing?
- Prove that your software is robust. How? Testing etc. 
+It was an important part of the project for us to plan out the project, and test each component of the full stack web-development. We started prototyping the MEAN stack as well as developing the project early to test the functionality early.
+
+\subsection{Prototyping}
+Early on we built multiple applications to test the functionality of the MEAN stack. We built a Node.js application, then added ExpressJS. Getting a basic grasp of each technology before advancing was very import as to understanding how the system as a whole will work from top to bottom.
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{img/prototypes.PNG}
+  \caption{GitHub Prototypes}
+  \label{fig:GHP}
+\end{figure}
+
+As you can see above there is four GitHub projects. The first one at the top is the final project. The rest are prototypes we developed to test the MEAN stack functionality and understand each component of the MEAN stack (MongoDB, ExpressJS, Node.js and Angular).
+
+\subsection{Deployment Testing}
+We tested the project using a three stage deployment. Initial, medial and final. Each stage covered a criteria on the deployment process. Initial used for unit testing, medial for early deployment testing and final for the public release of the application.
+
+\subsubsection{Initial}
+Initial testing involved testing the application on the local-host and test each functionality to see how the application would react to our inputs. This was the primary method of testing individual components and ensuring the application would work on the local-host port 3000.
+
+\subsubsection{Medial}
+After the initial testing stage we had a medial stage for deployment. We built a home server to test the application over a network. This involved buying and building the home server. Once setup and built we connected the PC to the home network and gave the PC a static IP (Internet Protocol). This was extremely important, without giving the server a static IP the local address such as 192.168.0.10 could be moved to 192.168.0.50. If the local IP of the server changed, the port forwarding address would need to change each time the server's did, which would be very tedious. 
+
+Once the IP of the server was setup we port forwarded the port 3000 to the server PC's static IP address. The port 3000 had to be port forwarded because of the application using that port. With this setup we could access the application from another PC in another location. This was used to demo the application to supervisors in meetings.
+
+\subsubsection{Final}
+With a grasp on how deployment works from the stage above we had the knowledge on how and what needed to be done. We deployed our project on AWS (Amazon Web Services). We went with AWS because of their support for the MEAN stack made it a prime contender. Once deployed onto AWS we knew we could access it from inside the instance, but not outside. So knew from above we need to open the port and direct it to our AWS instance. Although in this case, AWS handled the local IP and all we had to do in deployment in this stage was open the port using AWS console, which acted as a router for our AWS instance.
+
 \subsection{Unit Testing}
 testing parts of program
-\subsection{Beta Testing}
-giving the program to peers
+
 
 % ========================== Performance ========================== 
 \section{Performance}
