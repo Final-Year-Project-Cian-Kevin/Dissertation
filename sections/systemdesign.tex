@@ -255,12 +255,22 @@ The presentation tier is based on the Angular front-end web framework. In contra
 The Angular services allow our application to interact and access data from our database via the node server. Thus keeping data retrieval separate to page functions. In the services we provide the logic to process HTTP requests to the API to perform CRUD operations on the data served by the Node.js/ExpressJS server. 
 
 \subsection{Page views}
-In this section we will look at some screen shots of the web application from the view of a PC web browser and on a Samsung Galaxy S6 mobile device. For each page a brief summary of the functionality of the page will be provided along with any input validation that was used. 
-How we designed the ui
-few screenshots off finished site
+In this section we will look at some screen shots of the web application from the view of a PC web browser and on a Samsung Galaxy S6 mobile device. For each page we give a brief overview of the features and out summary of the functionality of the page will be provided along with any input validation that was used. As there is alot of pages we will only describe the most important ones. A few screenshots will be provided of the finished site to show the design of the UI.
 
 
 \subsubsection{Navigation Pane}
+\paragraph{Overview\newline}
+
+\begin{itemize}
+    \item Fully responsive.
+    \item Positioned under header but sticks to top of page when scrolling down.
+    \item When not logged in contains input boxes for username and password and option to register an account.
+    \item Links to \textit{Home, Make Post and About Page}.
+    \item Displays user avatar and username.
+    \item Drop down menu contains link to \textit{Profile, Account, Friends, Saved Posts} and an option to logout.
+\end{itemize}
+
+\paragraph{In Depth Review\newline}
 The header component is injected into the main index.js view. This allows us to render the navigation pane at all times while the main content view is adapted to the selected page view. The header component contains a header logo displaying the image that was designed for the application and a navigation bar with numerous features. When designing the navbar we decided it must meet the following conditions: appealing, easy to use and fully functional, all whilst being fully responsive to changing screen sizes and different devices.
 
 To add the the functionality when a user enters the site and is not currently logged in the navbar contains a log in form that enables a user to log in. As long as a user is not logged in all other functionality from the navbar is disabled as seen in Figure ~\ref{fig:header} . To add to the pleasing aesthetic the navbar is also made sticky. Figure ~\ref{fig:headerStick} shows that when the page is scrolled down the header logo will scroll out of view and the navbar will stay located at the top of the page.
@@ -302,6 +312,19 @@ However when the user is logged in even more functionality is active. Shown in F
 
 \subsubsection{Log in Page}  \label{loginpage}
 
+\paragraph{Overview\newline}
+\begin{itemize}
+    \item Fully responsive.
+    \item Username and password input box.
+    \item Log in authenticated by server.
+    \item Returns {\color{red}\textit{Log in failed. User not found}} message if user not found in database.
+    \item Returns {\color{red}\textit{Incorrect password}} message if password is incorrect.
+    \item Hides password entered.
+    \item Link to \textit{Register Page}.
+    \item Saves a JWT token retrieved from server after successful log in.
+\end{itemize}
+
+\paragraph{In Depth Review\newline}
 The log in page consists of of a username and password input box. In order to submit a login attempt both values must be supplied. The values are then authenticated on the server and if successful the server returns a JWT token that's stored in session storage and the user is redirected to the homepage view.  If the username is invalid the server will return a "Log in failed. User not found." error message to the view or in the case of an invalid password a "Incorrect password" message is returned.
 \begin{figure}[H]
 \centering
@@ -320,6 +343,19 @@ The log in page consists of of a username and password input box. In order to su
 \end{figure}
 
 \subsubsection{Register Page}
+\paragraph{Overview\newline}
+\begin{itemize}
+    \item Fully responsive and validated.
+    \item Checks database if username or email already exists returning error message  {\color{red}\textit{Username/email already in use please choose another }}.
+    \item Password and Confirm Password to validates passwords match, returns  {\color{red}\textit{passwords don't match}} if not.
+    \item Password must be 8 characters long, returns {\color{red}\textit{passwords don't match}}.
+    \item Hides password entered.
+    \item All fields are required, returns error message {\color{red} \textit{X is required}} .
+    \item Email verified must have '@' and '.', returns  {\color{red}\textit{Email required}} if not.
+    \item Successful register save users details to database with password encrypted.
+\end{itemize}
+
+\paragraph{In Depth Review\newline}
 The register page allows a user to enter credentials for a new user profile. To submit a register attempt all fields are required. This page view contains numerous different aspects that must be validated:
 
 
@@ -359,6 +395,19 @@ The register page allows a user to enter credentials for a new user profile. To 
 \end{figure}
 
 \subsubsection{Profile Page} 
+
+\paragraph{Overview\newline}
+\begin{itemize}
+    \item Fully responsive grid layout, sectioned into Profile section, recent posts and recent comments.
+    \item Profile section displays user avatar, profile image and profile information.
+    \item Server checks if viewing someone another users profile and displays a follow/unfollow toggle button if it is.
+    \item Selecting follow/unfollow adds/removes an entry to the following table in the database using foreign keys to set a relationship between objects. 
+    \item Link to subscribed posts and friends page.
+    \item Recent posts section displays a fully functional clickable list of angular material cards posts.
+    \item Recent comments section displays a fully functional clickable list of angular material cards with latest comments.
+\end{itemize}
+
+\paragraph{In Depth Review\newline}
 The profile page is used to view a users details (profile image, avatar, name, username email and when they registered) and activity (created posts and comments on other posts). By using \textbf{Angular Material Components} the page has been split into a grid to display different sections as seen in the Figure \ref{fig:profileHTML} snippet. The grids are assigned to profile info, recent posts and recent comments. Harnessing the functionality of \textbf{Angular Material Components} enables the page to be fully responsive. As you can see in Figure \ref{fig:profilePC} the layout is set to have profile info to the left, while recent comments and posts are stacked on top each other to he right. However as the size of the screen scales, so does the view the grid components that will shrink as the screen size decreases and in the case of a mobile device as seen in Figure \ref{fig:profileMOBILE} the components are stacked vertically on top of one another. 
 
 \begin{lstlisting}[language=HTML,caption={Angular Material Component Grid},captionpos=b,label={fig:profileHTML}]
@@ -459,6 +508,17 @@ The profile page is used for both viewing a users own profile and viewing anothe
 \end{figure}
 
 \subsubsection{Settings Page}
+\paragraph{Overview\newline}
+\begin{itemize}
+    \item Fully responsive.
+    \item Allows user to update email address, first name, surname and bio in the database.
+    \item Only values changed will be sent to database to update.
+    \item Server validates to ensure email is unique and not already in database returning error message {\color{red}\textit{Email already exists please choose another}} if validation fails.
+    \item Allows user to upload a profile image to the server.
+    \item Image upload can be previewed and validation checks image is of image type.
+\end{itemize}
+
+\paragraph{In Depth Review\newline}
 The settings page view allows a user to edit their current credentials and is accessed by clicking the settings tab on the navbar drop down menu. The form fields are pre-filled from the users data retrieved by the server.
 
 \begin{lstlisting}[language=JavaScript,caption={Auto fill form data},captionpos=b,label={fig:userscema}]
@@ -500,6 +560,15 @@ setForm(id) {
 \end{figure}
 
 \subsubsection{Friends Page} 
+\paragraph{Overview\newline}
+\begin{itemize}
+    \item Fully responsive.
+    \item Retrieves who a user is following and who is following them from database.
+    \item Toggle button to display either followers or following.
+    \item Following/ followers are display as card lists with profile avatar, username that acts as a link to their profile and the users bio.
+\end{itemize}
+
+\paragraph{In Depth Review\newline}
 The friends page is a view that allows a user to toggle a view between followers and following. This page can be accessed in two ways which render different views. If a user wants to view a list of their own followers and who they are following they can select the "Friends" button in the navbar drop down menu. If a user would like to view another users followers and following list a button "Follows" can be selected on the preferred users profile page. The lists contain cards that show a image avatar, username and bio for each user. To view a users profile from this view simply click on the username and the system redirects you to that users profile page.
 \begin{figure}[H]
 \centering
@@ -518,6 +587,17 @@ The friends page is a view that allows a user to toggle a view between followers
 \end{figure}
 
 \subsubsection{Home Page}
+\paragraph{Overview\newline}
+\begin{itemize}
+    \item Fully responsive.
+    \item Divided into three sections displaying lists of cards for news posts, banter posts and user posts.
+    \item All content is retrieved from the servers API.
+    \item The news posts and banter posts are generated from the Reddit API.
+    \item Each card contains an avatar, title, the source and a picture.
+    \item A user can comment on a post by clicking into it.
+\end{itemize}
+
+\paragraph{In Depth Review\newline}
 
 \begin{figure}[H]
 \centering
@@ -537,6 +617,14 @@ The friends page is a view that allows a user to toggle a view between followers
 
 \subsubsection{Posts Page}
 \subsubsection{About Page}
+\paragraph{Overview\newline}
+\begin{itemize}
+    \item Fully responsive.
+    \item Displays cards for the team members, documentation and the project components.
+    \item Each card has an avatar, heading, brief summary and a link to the resource.
+\end{itemize}
+
+\paragraph{In Depth Review\newline}
 The purpose of the about page view is to give the user an insight into the project. The view is separated into three sections with each item being displayed on its own card. Each card consists of an image, a link to the resource, a summary of the resource link and also some brief information on that item. The Team section is a over view of the developers of the web application with clickable link to view our Github profiles. The Documentation section contains links to the project source code, dissertation and the Swagger documentation for the API. The third section is used to provide links to resources and give information on some of the components used in the project such as  MEAN Stack, MongoDB, Express.js, Angular, Node.JS, Reddit API, Passport.JS, HTML and CSS.
 \begin{figure}[H]
 \centering
