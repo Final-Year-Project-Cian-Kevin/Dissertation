@@ -1,4 +1,11 @@
 \chapter{System Evaluation} \label{eval}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{img/Diagram.png}
+  \caption{System Architecture}
+  \label{fig:GHP}
+\end{figure}
+
 As discussed in section \textit{1.1: Project Objectives}, we will now expand on the system implemented in this project.
 
 \paragraph{Dissertation}
@@ -47,29 +54,51 @@ Once the IP of the server was setup we port forwarded the port 3000 to the serve
 With a grasp on how deployment works from the stage above we had the knowledge on how and what needed to be done. We deployed our project on AWS (Amazon Web Services). We went with AWS because of their support for the MEAN stack made it a prime contender. Once deployed onto AWS we knew we could access it from inside the instance, but not outside. So knew from above we need to open the port and direct it to our AWS instance. Although in this case, AWS handled the local IP and all we had to do in deployment in this stage was open the port using AWS console, which acted as a router for our AWS instance.
 
 \subsection{Unit Testing}
-testing parts of program
+Unit testing was a testing method we used at every stage in development. Each function block of code was tested for the desired output such as a GET method to the API, and then testing to see if that function was retrieving the JSON data before continuing onto the next stage.
 
+\subsection{System Testing}
+We used system testing on each stage of deployment to ensure all components worked properly in a deployed environment. This testing method involved using the application and all its components and features. This stage was done far less frequently than unit testing, but was just as important to ensure our application was of a high quality.
 
 % ========================== Performance ========================== 
 \section{Performance}
-Use performance benchmarks (space and time) if algorithmic.
+The application preforms remarkable well. The biggest 'bottleneck' that stifles performance will be the users connection to the program or the service it is hosted on.
+
+The API preforms very well, and because of MongoDB using JSON to store data there is no conversion needed, so the computing needed to access the API is very low.
+
+We also used the Reddit API to make news posts and funny posts for users. This API at first was requested by the user when they accessed the home page but quickly realized that when we wanted to add comments and to save posts we would need to store the data in some way. We reformatted how users get the data and realized having the user access an API route that gets the data from the MongoDB was a little bit faster then when we originally set up the application.
+
+The Angular client is extremely responsive and due to its single page nature felt far more modern than a multiple page website. Angular being a single page web framework allowed our application to have a more modern look and feel to it. As the user changes view to different components they never see a white screen when changing pages. The navigation bar for example is always present when changing views.
 
 % ========================== Objectives ========================== 
 \section{Evaluation of Objectives}
-Measure the outcomes / outputs of your system / software against the objectives from the Introduction.
-\subsection{Objective 1}
-did we reach our objective?
+In this section we will expand on the objectives we set out for the project. The project was built with these objectives in mind:
 
-\subsection{Objective 2}
-did we reach our objective?
+\paragraph{Produce a simple easy to use web application:}
+We did produce a simple and easy to use web application. Using Node.js to host the application by delivering the Angular application to the user and host the API. Using Angular were were able to compartmentalize each component and work on each individually. Using Angular we were able to provide an easy to navigate and responsive single page web application.
 
-\subsection{Objective 3}
-did we reach our objective?
+\paragraph{Deliver  a  social  platform  for  tech  savvy  people  that  differs  from  the norm:}
+We successfully made a social media developed around users who are tech savvy. The site uses the Reddit API to make sure there is always news posts and funny light hearted posts based around technology. We also allowed the user to make their own posts to share images and news articles.
 
-\subsection{Objective 4}
-did we reach our objective?
+We made a comment section to allows a community to built up. Allowing comments was extremely important as to allow small developers to put up a post to ask for help and have other users help out. Or a user post a link to their GitHub to ask for their opinion. A comment section had to be nailed down in order to built a community.
+
+To expand on community relations we made user profiles. User profiles allow other users to follow them, see their comments, posts, followed users and subscribed posts. User profiles allows other users to built up a rapport with one another.
+
+We tried to differ from other technology based social media by adding in funny light hearted posts from the Reddit API. We felt the only social media available for the tech savvy were from a much more professional standpoint.
+
+\paragraph{Dive into new web technologies:}
+Diving into a new web technology for us was very important. We had experience with Spring, GO and Ruby on  Rails. But we wanted to learn a completely new architecture we had no experience with. After deciding on the MEAN stack, we quickly realized how different web development is with a framework like Angular. Angular as we discussed earlier is a single page web application framework. This was different from the traditional sending a HTML document and having the user interact with that. 
+
+We also had no experience with Node.js. Node.js uses JavaScript which we had quite a lot of experience with, but never outside the browser. Node.js is very powerful and allows developers to do quite a lot very quickly. Node.js includes the Node Package Manager (NPM), which allows developers to access to the largest package library. NPM allowed us to considerate on creating function features by using packages such as Passport.js.
+
+\paragraph{Complete  the  project  collaborating  as  a  team  using  an  efficient  and effective approach:}
+As a group project and at a scale we've never done before, we wanted to ensure quality  and consistency would be kept. We met up weekly to plan out the next stage of development. We also met up with our supervisors weekly to get feedback on our plan and progress made. Using these meeting was extremely important to ensure we were both on the same page.
+
+We also made sure to keep in persistent contact with one another using application such as WhatsApp and Facebook, which allowed us to maintain in contact outside college. These applications allowed us to share screenshots of errors we both had, and share our thoughts on a feature.
+
+Using GitHub allowed us to both work on a single project and see the changes we were making to the project. Using GitHub branches we could test a feature before committing it to the master branch. GitHub was a great way for us to collaborate on the project together and get a feel for how collaborative projects work.
 
 % ========================== Limitations ========================== 
-\section{Limitations}
-Areas for improvement?
-Highlight any limitations or opportuni-ties in your approach or technologies used.
+\section{Limitations and Improvements}
+
+
+\section{Overall Evaluation}
