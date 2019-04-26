@@ -152,7 +152,7 @@ Routes altering data (POST, PUT, DELETE) requires the user to be authenticated t
 
 To add a layer of security to user requests and ensure no malicious requests are made by another user trying to impersonate another user we added a Node.js import called PassportJS. PassportJS is authentication middle-ware for Node.js. PassportJS allows
 
-\subsection{Swagger}
+\subsection{Swagger} \label{swag}
 Swagger is an open source software framework sponsored by SmartBear. Swagger is used to create, document and consume  RESTful Web services. Swagger offers an easy way to document RESTful Web services by using Swagger documentation definitions and Swagger UI to document an API and give an example of how the API works. Swagger works by having the developer add comments similar to java-docs in order to document a route telling swagger the components of the route and the model it uses. Giving Swagger this information Swagger will use the data to create a JSON object with all the data about the API in a format that can be used by the developer for other means or to be used in conjunction with swagger UI, which we will discuss later.
 
 \subsubsection{Swagger.json}

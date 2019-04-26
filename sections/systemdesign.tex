@@ -240,16 +240,40 @@ The message is then appended to the log file allowing us to easily view the acti
 \end{lstlisting}
 
 % ========================== API Calls ========================== 
-\subsection{API/HTTP}
-TODO
-How we designed api calls/
-insert info from swagger
+\subsection{API}
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{img/swaggerDoc.png}
+  \caption{Swagger Documentation}
+  \label{fig:swaggerDoc}
+\end{figure}
+
+We documented our API using Swagger we we talked about in \textit{Section \ref{swag} } of the technology review.
+
+Our API is a RESTful web service which allows the user full access to the website by using the Angular client. The RESTful web API can be used to further expanded TechBook by making a mobile application that interacts with the API. To view the swagger documentation of TechBook, see \textit{Section \ref{appen} Appendices}.
 
 % ========================== UI ========================== 
 \section{Application Tier}
 The presentation tier is based on the Angular front-end web framework. In contrast to traditional multiple page web applications the Client is presented as a single page application in which components are injected into. In this section we will look at the Angular app structure, the services which allow us to interact with our node js server and the finished view of the pages.
 
-\subsection{Angular folder structure}
+\subsection{TypeDoc}
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{img/typeDoc.png}
+  \caption{TypeDoc Documentation}
+  \label{fig:typeDoc}
+\end{figure}
+
+\begin{lstlisting}[language=TypeScript,caption={TypeDoc Annotation},captionpos=b,label={fig:typeDocExample}]
+     /**
+       * Set title.
+       *
+       * @param {string} newTitle- new title.
+       * @memberof LoginComponent
+       */
+      public setTitle(newTitle: string) {
+        this.titleService.setTitle(newTitle);
+      }
+\end{lstlisting}
+
 
 \subsection{Angular Services}
 The Angular services allow our application to interact and access data from our database via the node server. Thus keeping data retrieval separate to page functions. In the services, we provide the logic to process HTTP requests to the API to perform CRUD operations on the data served by the Node.js/ExpressJS server. 
@@ -331,13 +355,13 @@ The login page consists of a username and password input box. In order to submit
 \begin{minipage}{.75\textwidth}
   \centering
   \includegraphics[width=.9\linewidth]{img/ui/login_PC.PNG}
-  \captionof{figure}{Web View}
+  \captionof{figure}{Login Web View}
   \label{fig:loginPC}
 \end{minipage}%
 \begin{minipage}{.25\textwidth}
   \centering
   \includegraphics[width=.9\linewidth]{img/ui/login_MOBILE.PNG}
-  \captionof{figure}{Mobile view}
+  \captionof{figure}{Login Mobile view}
   \label{fig:loginMOBILE}
 \end{minipage}
 \end{figure}
@@ -383,13 +407,13 @@ The register page allows a user to enter credentials for a new user profile. To 
 \begin{minipage}{.75\textwidth}
   \centering
   \includegraphics[width=.9\linewidth]{img/ui/sigup_PC.PNG}
-  \captionof{figure}{Web View}
+  \captionof{figure}{Register Web View}
   \label{fig:signupPC}
 \end{minipage}%
 \begin{minipage}{.25\textwidth}
   \centering
   \includegraphics[width=.9\linewidth]{img/ui/signup_MOBILE.PNG}
-  \captionof{figure}{Mobile view}
+  \captionof{figure}{Register Mobile view}
   \label{fig:signupMOBILE}
 \end{minipage}
 \end{figure}
@@ -496,13 +520,13 @@ The profile page is used for both viewing a users own profile and viewing anothe
 \begin{minipage}{.75\textwidth}
   \centering
   \includegraphics[width=.9\linewidth]{img/ui/profile_PC.PNG}
-  \captionof{figure}{Web View}
+  \captionof{figure}{Profile Web View}
   \label{fig:profilePC}
 \end{minipage}%
 \begin{minipage}{.25\textwidth}
   \centering
   \includegraphics[width=.9\linewidth]{img/ui/profile_MOBILE.PNG}
-  \captionof{figure}{Mobile view}
+  \captionof{figure}{Profile Mobile view}
   \label{fig:profileMOBILE}
 \end{minipage}
 \end{figure}
@@ -548,13 +572,13 @@ setForm(id) {
 \begin{minipage}{.75\textwidth}
   \centering
   \includegraphics[width=.9\linewidth]{img/ui/settings_PC.PNG}
-  \captionof{figure}{Web View}
+  \captionof{figure}{Settings Web View}
   \label{fig:settingsPC}
 \end{minipage}%
 \begin{minipage}{.25\textwidth}
   \centering
   \includegraphics[width=.9\linewidth]{img/ui/settings_MOBILE.PNG}
-  \captionof{figure}{Mobile view}
+  \captionof{figure}{Settings Mobile view}
   \label{fig:settingsMOBILE}
 \end{minipage}
 \end{figure}
@@ -575,13 +599,13 @@ The friend's page is a view that allows a user to toggle a view between follower
 \begin{minipage}{.75\textwidth}
   \centering
   \includegraphics[width=.9\linewidth]{img/ui/followPC.PNG}
-  \captionof{figure}{Web View}
+  \captionof{figure}{Friends Web View}
   \label{fig:followPC}
 \end{minipage}%
 \begin{minipage}{.25\textwidth}
   \centering
   \includegraphics[width=.9\linewidth]{img/ui/followMOBILE.PNG}
-  \captionof{figure}{Mobile view}
+  \captionof{figure}{Friends Mobile view}
   \label{fig:followMOBILE}
 \end{minipage}
 \end{figure}
@@ -604,18 +628,17 @@ The friend's page is a view that allows a user to toggle a view between follower
 \begin{minipage}{.75\textwidth}
   \centering
   \includegraphics[width=.9\linewidth]{img/ui/homepcsnap.PNG}
-  \captionof{figure}{Web View}
+  \captionof{figure}{Home Page Web View}
   \label{fig:test1}
 \end{minipage}%
 \begin{minipage}{.25\textwidth}
   \centering
   \includegraphics[width=.9\linewidth]{img/ui/homemobile.PNG}
-  \captionof{figure}{Mobile view}
+  \captionof{figure}{Home Page Web View}
   \label{fig:test2}
 \end{minipage}
 \end{figure}
 
-\subsubsection{Posts Page}
 \subsubsection{About Page}
 \paragraph{Overview\newline}
 \begin{itemize}
@@ -631,29 +654,13 @@ The purpose of the About Page view is to give the user an insight into the proje
 \begin{minipage}{.75\textwidth}
   \centering
   \includegraphics[width=.9\linewidth]{img/ui/about_PC.PNG}
-  \captionof{figure}{Web View}
+  \captionof{figure}{About Web View}
   \label{fig:aboutPC}
 \end{minipage}%
 \begin{minipage}{.25\textwidth}
   \centering
   \includegraphics[width=.9\linewidth]{img/ui/about_MOBILE.PNG}
-  \captionof{figure}{Mobile view}
+  \captionof{figure}{About Mobile view}
   \label{fig:aboutMobile}
 \end{minipage}
 \end{figure}
-\begin{itemize}
-\item Architecture, UML etc. An overview of the different components of the system. Diagrams etc… Screen shots etc.
-\end{itemize}
-
-\begin{table}[h]
-  \centering
-  \begin{tabular}{x{2cm}p{3cm}}
-    \toprule \\
-    Column 1 & Column 2 \\
-    \midrule \\
-    Rows 2.1 & Row 2.2 \\
-    \bottomrule
-  \end{tabular}
-  \caption{A table.}
-  \label{table:mytable}
-\end{table}
