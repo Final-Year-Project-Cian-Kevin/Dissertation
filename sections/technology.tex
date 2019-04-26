@@ -19,13 +19,13 @@ Early in development when we were brainstorming, we decided to do a full stack d
 Once we knew what stack we were using and how to use it in a basic form from our prototyping stage, we moved onto breaking the stack down to each component and getting to know each component better, so when full development starts we would have a better understand how the entire stack operates and interacts with each component. This gave us a greater understanding of how each component operated and allowed us to plan out how each component would operate from top to bottom. \cite{12931134620180301}
 
 \subsection{MongoDB}
-You may know what MySQL and other relational databases are. MySQL is analogous to a spreadsheet, it has name columns and rows of rows of data. Every database "tool" shows the data as a spreadsheet (Microsoft Access). Data can be linked through special functions such as a "JOIN" mechanism to allow the user to built meta spreadsheets. \cite{gmit.19773820130101}
+You may know what MySQL and other relational databases are. MySQL is analogous to a spreadsheet, it has name columns and rows of data. Every database "tool" shows the data as a spreadsheet (Microsoft Access). Data can be linked through special functions such as a "JOIN" mechanism to allow the user to built meta spreadsheets. \cite{gmit.19773820130101}
 
 MongoDB is a database and not a database tool (Mongo Compass), instead of a spreadsheet like MySQL it is more like a folder of documents. The contents of the "folders" are not checked to see if the new file differs from the current file format. This sounds like an inefficient system but all these folders are called collections in MongoDB. The collections are usually grouped by how the user would group MySQL tables. While MongoDB can contain keys like MySQL there is no built-in functionality in order to join documents together in order to retrieve related data in another collection.
 
 Databases are classified into two categories of SQL and NoSQL. MySQL is an example of an SQL database, and MongoDB is an example of a NoSQL database. MongoDB is very reliable as its very hands off and gives the user the responsibility for how data is saved and read. If a user adds another entry into the collection that doesn't match the other entries MongoDB doesn't inform the user that the data is not in the correct format as collections do not have definitions and leave that responsibility to the user. The same goes for joining two collections together. The joining is left up to the user on how they carry that out, usually, the user would create an ID which is present in both collections in order to 'join' them together.
 
-MongoDB is so hands off about how users read and write to the database it stops the frequently used attack on SQL databases called SQL injection. SQL injection occurs when the user directly interacts with the database which allows them to manipulate their input to test the database. MongoDB doesn't have this problem as its hands off the reading data to the user to the point where a search for that data will include the statement but nor process the statement as such. \cite{gmit.19773820130101}
+MongoDB is so hands off about how users read and write to the database it stops the frequently used attack on SQL databases called SQL injection. An SQL injection occurs when the user directly interacts with the database which allows them to manipulate their input to test the database. MongoDB doesn't have this problem as its hands off the reading data to the user to the point where a search for that data will include the statement but nor process the statement as such. \cite{gmit.19773820130101}
 
 MongoDB uses the JSON standard to store data. The JSON data is then classified into a collection as we discussed above. 
 
@@ -43,7 +43,7 @@ Example of how a JSON entry in a collection could look like:
 \end{minted}
 
 \subsection{ExpressJS}
-ExpressJS is a minimalistic web framework built for Node.js that waits for the browser to connect so the server can send process the request and send back the relevant form (JSON, HTML, Raw Text, ETC...). Without ExpressJS the user must handle creating a server, handling routing all manually.
+ExpressJS is a minimalistic web framework built for Node.js that waits for the browser to connect so that the server can send, process the request and respond with the relevant form (JSON, HTML, Raw Text, ETC...). Without ExpressJS the user must handle creating a server, handling routing all manually.
 
 ExpressJS relies on APIs made available by Node.js. ExpressJS cannot exist without Node.js. ExpressJS is a thin layer over Node.js which makes developing servers and routes much easier. ExpressJS's main feature that makes it enticing to developers is how it serves dynamic content (Content that changes based on user requests). 
 
@@ -61,7 +61,7 @@ We chose Angular because of its integration with Node.js/ExpressJS which allowed
 \subsection{Node.js}
 Node.js is a cross-platform JavaScript run-time environment that allows developers to run JavaScript outside the browser. This framework is a huge deal for JavaScript. Node.js allows developers to perform actions with JavaScript on the developer's local machine like they would with other programming languages. What makes Node.js so beloved by developers is the built-in functionality of Node.js. Node.js has built-in HTTP function to allow Node.js to run HTTP actions all within the environment. This built-in HTTP functionality has made Node.js extremely popular and given the rise to isomorphic web applications and due to the fact that Node.js can run as a server back-end using JavaScript and have JavaScript on the front-end meaning there is the opportunity for the two to share code between them reducing testing and maintenance. \cite{67301420130101}
 
-Node.js is a great framework due when paired with a front-end framework such as Angular, and a database such as MongoDB. When using a setup like this the entire web stack is a JavaScript based and allows the user to easily manipulate data from top to bottom.
+Node.js is a great framework due to when paired with a front-end framework such as Angular, and a database such as MongoDB. When using a setup like this the entire web stack is JavaScript-based and allows the user to easily manipulate data from top to bottom.
 
 The reason we picked Node.js is because of its ease of use and how rapidly we could get a working HTTP server up and running. Node.js also made a lot of sense when paired with Angular which was the front-end framework we picked. Node.js makes developing HTTP servers easy, which allowed us to spend more time on setting up other features such as user authentication and the Reddit API. 
 
@@ -112,7 +112,7 @@ class user{
 }
 \end{minted}
 
-Let's say the user created an instance of this object and set the values to "Smithy", "smith123" and "25". To send this instance over to another machine in a standard the other machine we can't just send it in raw text using HTTP so we need to serialize the data before transfer using the JSON specification. 
+Let's say the user created an instance of this object and set the values to "Smithy", "smith123" and "25". To send this instance over to another machine in a standard the other machine we can't just send it in the raw text using HTTP so we need to serialize the data before transfer using the JSON specification. 
 
 The JSON string would look like this when the class is serialized:
 \begin{minted}{js}
@@ -148,17 +148,17 @@ The REST API we setup is intended to give access to all aspects of the project i
 A big benefit of the API is all functionality of the application is available from the REST API. This allows for us to if we decided to, add a mobile application or create a monitoring tool to see the data and analyze it. \cite{124257720160101}
 
 \subsection{Security}
-Routes altering data (POST, PUT, DELETE) requires the user to be authenticated to prevent data being altered by another user. We authenticated certain routes such as create a post to check who is creating this post, and to link to their profile but also so only they can post in their name. Authenticating routes such as comment, post, settings and following was a big part of the planning stage as we needed to figure out a way to stop intrusive behaviour from outside sources abusing the API.
+Routes altering data (POST, PUT, DELETE) requires the user to be authenticated to prevent data being altered by another user. We authenticated certain routes such as create a post to check who is creating this post, and to link to their profile but also so only they can post in their name. Authenticating routes such as comment, post, settings, and following was a big part of the planning stage as we needed to figure out a way to stop intrusive behavior from outside sources abusing the API.
 
-To add a layer of security to user requests and ensure no malicious requests are made by other user trying to impersonate another user we added a Node.js import called PassportJS. PassportJS is authentication middle-ware for Node.js. PassportJS allows
+To add a layer of security to user requests and ensure no malicious requests are made by another user trying to impersonate another user we added a Node.js import called PassportJS. PassportJS is authentication middle-ware for Node.js. PassportJS allows
 
 \subsection{Swagger}
-Swagger is an open source software framework sponsored by SmartBear. Swagger is used to create, document and consume  RESTful Web services. Swagger offers an easy way to document RESTful Web services by using Swagger documentation definitions and Swagger UI to document an API and give example on how the API works. Swagger works by having the developer add comments similar to java-docs in order to document a route telling swagger the components of the route and the model it uses. Giving swagger this information swagger will use the data to create a JSON object with all the data about the API in a format that can be used by the developer for other means or to be used in conjunction with swagger UI, which we will discuss later.
+Swagger is an open source software framework sponsored by SmartBear. Swagger is used to create, document and consume  RESTful Web services. Swagger offers an easy way to document RESTful Web services by using Swagger documentation definitions and Swagger UI to document an API and give an example of how the API works. Swagger works by having the developer add comments similar to java-docs in order to document a route telling swagger the components of the route and the model it uses. Giving Swagger this information Swagger will use the data to create a JSON object with all the data about the API in a format that can be used by the developer for other means or to be used in conjunction with swagger UI, which we will discuss later.
 
 \subsubsection{Swagger.json}
 As we discussed above Swagger is used to document a route. But how does it do that? Swagger creates a JSON object which it hosts at a given route in order to be accessible by developers for their own purposes, or by using Swagger UI.
 
-The JSON part of Swagger is where the swagger documentation is rendered into a machine readable format.
+The JSON part of Swagger is where the swagger documentation is rendered into a machine-readable format.
 
 \begin{minted}{js}
 {
@@ -204,7 +204,7 @@ paths: {
 },
 \end{minted}
 
-An example of one of the paths contained in the paths object array. In paths we have a list of paths documented using Swagger, these paths contain information about the path such as the title in which the path could be classified under, example above is 'Books'. With the title we can classify different paths that may handle something to do with 'books' and thus we may want to organizes the paths under 'books'. The path also contains the schema used which is very important in order to understand how the API route operates. Does the path return JSON?, XML?, raw text?
+An example of one of the paths contained in the paths object array. In paths we have a list of paths documented using Swagger, these paths contain information about the path such as the title in which the path could be classified under, the example above is 'Books'. With the title we can classify different paths that may handle something to do with 'books' and thus we may want to organize the paths under 'books'. The path also contains the schema used which is very important in order to understand how the API route operates. Does the path return JSON?, XML? raw text?
 
 \begin{minted}{js}
 definitions: {
@@ -233,7 +233,7 @@ definitions: {
 },
 \end{minted}
 
-Using the definition in conjunction with the path we can get a better picture of how to API route works and what data is needed for it to operate correctly. The definitions contains definitions for each route and each definition inside definitions contains properties which describe the routes data and what type of data each property is.
+Using the definition in conjunction with the path we can get a better picture of how to API route works and what data is needed for it to operate correctly. The definitions contain definitions for each route and each definition inside definitions contains properties which describe the routes data and what type of data each property is.
 
 \subsubsection{Swagger UI}
 Swagger UI is a visual representation of the API documented using Swagger. Swagger UI is a great as it enables developers to save a lot of time in documenting an API, as it uses the Swagger JSON to visualize the API. 
@@ -257,12 +257,12 @@ A very basic way to think of JavaScript is that HTML is your bone structure. It 
 JavaScript is found in the database with MongoDB, which stores data using JSON (JavaScript Object Notation). MongoDB saves database entries using JSON to store elements of that collection. As we explained earlier what JSON is and how it stores classes into objects.
 
 \subsubsection{Server-Side}
-On the server-side we used Node.js. Node.js as we discussed above is what allows JavaScript to run outside the browser. JavaScript was used as the serer-side processing which handled routing for the API and for the Angular front-end.
+On the server-side we used Node.js. Node.js, as we discussed above, is what allows JavaScript to run outside the browser. JavaScript was used as the server-side processing which handled routing for the API and for the Angular front-end.
 
 \subsubsection{Front-End}
 The front end section of the web application uses TypeScript which is a super-set of JavaScript which we will talk about in greater detail below.
 
-in the server-side API handling routing for the web application. 
+In the server-side API, handling routing for the web application. 
 
 \subsection{TypeScript}
 TypeScript which is a super-set of JavaScript. JavaScript code is valid in a TypeScript environment, with some exceptions. A huge benefit over JavaScript is that TypeScript made it harder to create bugs and made JavaScript more manageable in larger systems.
@@ -302,7 +302,7 @@ Paragraph \\
 
 \vspace{5mm}
 
-Every web-page on the internet is a hypertext document. A hypertext document differs from a raw text document by allowing images, formatting and links. HTML is is what hold all the components of a web-page together. 
+Every web-page on the internet is a hypertext document. A hypertext document differs from a raw text document by allowing images, formatting, and links. HTML is what holds all the components of a web-page together. 
 
 \subsection{LaTeX}
 LaTeX is a text processor that is built around a markup language. Like HTML LaTeX uses tags to define a command or action to display text in a certain way. These tags work very similar to HTML where these tags are only seen on the source of the document and are hidden when the document is compiled into a format such as a PDF.
@@ -321,7 +321,7 @@ LaTeX would then compile this text into a document, like this one, where it rend
 \section{Styling and UI}
 In this section we will talk about the different technologies we used to develop the front-end user interface for our website. 
 
-User interfaces are an extremely important aspect of website design. As more people have access to the internet using different hardware and software to access website, it has become harder to develop a streamlined user interface that works across all devices. 
+User interfaces are an extremely important aspect of website design. As more people have access to the internet using different hardware and software to access a website, it has become harder to develop a streamlined user interface that works across all devices. 
 
 Things that can affect user interface development:
 \begin{itemize}
@@ -331,12 +331,12 @@ Things that can affect user interface development:
     \item Mobile/Desktop
 \end{itemize}
 
-Creating an intuitive user interface that works across most devices is difficult because of the above reasons. Using different technologies we will discuss below often these technologies take care of many of these issues. As long as the developer keeps them in mind and tries to use the functionality they provide to make the website accessible to as much people as possible.
+Creating an intuitive user interface that works across most devices is difficult because of the above reasons. Using different technologies we will discuss below often these technologies take care of many of these issues. As long as the developer keeps them in mind and tries to use the functionality they provide to make the website accessible to as many people as possible.
 
-Mobile has become a major part of accessing the internet as smart-phones have become a bigger part in peoples lives and can be used anywhere. Developing a user interface that works on both desktop PCs and mobile smart phones can be challenging. Developing a website that works on both devices was very important to us to keep up with modern trends.
+Mobile has become a major part of accessing the internet as smart-phones have become a bigger part in peoples lives and can be used anywhere. Developing a user interface that works on both desktop PCs and mobile smartphones can be challenging. Developing a website that works on both devices was very important for us to keep up with modern trends.
 
 \subsection{CSS}
-As we discussed briefly in the previous section, CSS is the  skin of the project. It's what most sites use to make their appearance more professional and not just a wall of text and buttons. CSS stands for 'Cascading Style Sheets. It's used by nearly all websites to improve their appearance and makes a website stand out from each other.
+As we discussed briefly in the previous section, CSS is the skin of the project. It's what most sites use to make their appearance more professional and not just a wall of text and buttons. CSS stands for 'Cascading Style Sheets. It's used by nearly all websites to improve their appearance and makes a website stand out from each other.
 
 \begin{figure}[H]
     \centering
@@ -356,21 +356,21 @@ As we discussed briefly in the previous section, CSS is the  skin of the project
 
 As we can see above is an example of what the web would look like without CSS. Facebook would go from a modern looking website to a very basic text website with a few images spread around.
 
-CSS is an extremely easy tool to grasp, but takes time to master, especially with the different screen sizes, aspect ratios and resolutions.
+CSS is an extremely easy tool to grasp but takes time to master, especially with the different screen sizes, aspect ratios, and resolutions.
 
 \subsection{Bootstrap}
 Bootstrap is a pre-written library of CSS files that enables developers to rapidly develop the UI for their website. Bootstrap also allows developers to make their own CSS files and build on top of Bootstrap to refine a website design.
 
-Bootstrap is great for quickly developing prototypes for website as it takes a lot of the grunt work and allows the developer to concentrate on getting the functionality right. CSS offers a great way to style a website, but often it can be hard to get a certain function to work correctly. Bootstrap takes care of a lot of the functionality the developer may need such as a sticky navigation-bar. Instead of the developer making a their own sticky navigation-bar using CSS and JavaScript, they can off-load that work to Bootstrap which will do all that using the specified Bootstrap class.
+Bootstrap is great for quickly developing prototypes for websites as it takes a lot of the grunt work and allows the developer to concentrate on getting the functionality right. CSS offers a great way to style a website, but often it can be hard to get a certain function to work correctly. Bootstrap takes care of a lot of the functionality the developer may need such as a sticky navigation-bar. Instead of the developer making their own sticky navigation-bar using CSS and JavaScript, they can off-load that work to Bootstrap which will do all that using the specified Bootstrap class.
 
 \subsection{Angular Material}
-Angular Material is developed bu Google and was developed to meet the demand of their new design spec 'Google Now'. Google Now laid out a grid-based website with animations and responsive cards, which was used used until the serviced was discontinued.
+Angular Material is developed by Google and was developed to meet the demand for their new design spec 'Google Now'. Google Now laid out a grid-based website with animations and responsive cards, which was used until the service was discontinued.
 
 \begin{displayquote}
 "Unlike real paper, our digital material can expand and reform intelligently. Material has physical surfaces and edges. Seams and shadows provide meaning about what you can touch" - Matias Duarte, VP of Design at Google
 \end{displayquote}
 
-Angular Material was birthed from the now defunct service. Angular Material was made to create a Bootstrap like alternative. Although Angular Material is an alternative to Bootstrap to develop front-end user interfaces, Bootstrap is often used in conjunction with Angular Material.
+Angular Material was birthed from the now defunct service. Angular Material was made to create a Bootstrap-like alternative. Although Angular Material is an alternative to Bootstrap to develop front-end user interfaces, Bootstrap is often used in conjunction with Angular Material.
 
 % ========================== Other Technology's  ========================== 
 \section{Other Technologies/Development environment}
@@ -383,7 +383,7 @@ In this section we will go over the technologies we used to develop and test the
   \label{fig:VSC}
 \end{figure}
 
-Use used Microsoft's Visual Studio Code as an integrated development environment as it was perfect for what we needed. We needed an integrated development environment that didn't just support one language. We needed one that supported, JavaScript, TypeScript, HTML, CSS and LaTeX. Visual Studio Code offers a specialized extensions that make developing with these technologies more initiative.
+Use used Microsoft's Visual Studio Code as an integrated development environment as it was perfect for what we needed. We needed an integrated development environment that didn't just support one language. We needed one that supported, JavaScript, TypeScript, HTML, CSS, and LaTeX. Visual Studio Code offers specialized extensions that make developing with these technologies more initiative.
 
 \subsubsection{Extensions}
 Extensions for Visual Studio Code are add-ons developed by others to make the development environment in Visual Studio Code better for a specific task.
@@ -399,7 +399,7 @@ HTML CSS Support extension is just what it sounds like, it adds better support f
     \item Supports remote CSS files.
 \end{itemize}
 
-It's small features like these that make developing HTML and CSS a little easier, especially when developing a full stack website. HTML CSS Support extension made developing with HTML and CSS feel more natural in Visual Studio Code.
+It's small features like these that make developing HTML and CSS a little easier, especially when developing a full stack website. HTML & CSS Support extensions made developing with HTML and CSS feel more natural in Visual Studio Code.
 
 \paragraph{JavaScript (ES6) Code Snippets}
 JavaScript (ES6) Code Snippets is an extension which adds shortcuts for common JavaScript and Typescript functionality such as for loop, console log and class constructors.
@@ -424,4 +424,4 @@ LaTeX Workshop was used early on in development. The extension provided live PDF
 LaTeX Workshop made developing LaTeX in Visual Studio Code easier with the features it provided.
 
 \subsection{Browsers}
-We used two primary and popular browsers during development. We didn't want to just use one as a feature might work for one but not the other. This wasn't a big problem as Angular handled much of the primary features with each browser, the bigger problem with trying to get cross browser support was CSS settings and how each browser would interpret them. We used chrome, Internet Explorer/Edge and Firefox as they had the largest market-share.
+We used two primary and popular browsers during development. We didn't want to just use one as a feature might work for one but not the other. This wasn't a big problem as Angular handled much of the primary features with each browser, the bigger problem with trying to get cross-browser support was CSS settings and how each browser would interpret them. We used chrome, Internet Explorer/Edge and Firefox as they had the largest market share.
